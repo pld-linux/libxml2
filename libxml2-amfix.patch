@@ -1,25 +1,16 @@
---- ibxml2-2.4.6/include/libxml/Makefile.am~	Thu Oct  4 04:35:06 2001
-+++ ibxml2-2.4.6/include/libxml/Makefile.am	Thu Oct 11 03:32:22 2001
-@@ -31,7 +31,4 @@
- 		DOCBparser.h \
- 		catalog.h
- 
--install-exec-hook:
--	$(mkinstalldirs) $(DESTDIR)$(xmlincdir)
--
- EXTRA_DIST = xmlversion.h.in xmlwin32version.h.in
---- libxml2-2.4.6/Makefile.am~	Thu Sep 20 04:35:06 2001
-+++ libxml2-2.4.6/Makefile.am	Thu Oct 11 03:39:25 2001
-@@ -5,7 +5,7 @@
+diff -Nur libxml2-2.4.7.orig/Makefile.am libxml2-2.4.7/Makefile.am
+--- libxml2-2.4.7.orig/Makefile.am	Tue Oct 30 14:04:41 2001
++++ libxml2-2.4.7/Makefile.am	Tue Oct 30 19:07:47 2001
+@@ -3,7 +3,7 @@
  
  SUBDIRS = include . doc example
  
--INCLUDES = -I@srcdir@/include -I$(top_builddir)/include @Z_CFLAGS@ 
-+INCLUDES = -I$(srcdir)/include -I$(top_builddir)/include $(Z_CFLAGS)
+-INCLUDES = -I@srcdir@/include -I$(top_builddir)/include @THREAD_CFLAGS@ @Z_CFLAGS@ 
++INCLUDES = -I$(srcdir)/include -I$(top_builddir)/include $(THREAD_CFLAGS) $(Z_CFLAGS)
  
- noinst_PROGRAMS=testSAX testHTML testXPath testURI testDocbook
+ noinst_PROGRAMS=testSAX testHTML testXPath testURI testDocbook testThreads
  
-@@ -14,9 +14,9 @@
+@@ -12,9 +12,9 @@
  bin_SCRIPTS=xml2-config
  
  lib_LTLIBRARIES = libxml2.la
@@ -31,16 +22,16 @@
  
  if WITH_TRIO_SOURCES
  libxml2_la_SOURCES = SAX.c entities.c encoding.c error.c parserInternals.c  \
-@@ -35,7 +35,7 @@
+@@ -33,7 +33,7 @@
  endif
  
  DEPS = $(top_builddir)/libxml2.la
--LDADDS = $(top_builddir)/libxml2.la @Z_LIBS@ $(ICONV_LIBS) -lm
-+LDADDS = $(top_builddir)/libxml2.la $(Z_LIBS) $(ICONV_LIBS) -lm
+-LDADDS = $(top_builddir)/libxml2.la @THREAD_LIBS@ @Z_LIBS@ $(ICONV_LIBS) -lm
++LDADDS = $(top_builddir)/libxml2.la $(THREAD_LIBS) $(Z_LIBS) $(ICONV_LIBS) -lm
  
- man_MANS = xmllint.1 xml2-config.1 libxml.4
+ man_MANS = xml2-config.1 libxml.4
  
-@@ -45,7 +45,7 @@
+@@ -43,7 +43,7 @@
  xmllint_SOURCES=xmllint.c
  xmllint_LDFLAGS = 
  xmllint_DEPENDENCIES = $(DEPS)
@@ -49,7 +40,7 @@
  
  testSAX_SOURCES=testSAX.c
  testSAX_LDFLAGS = 
-@@ -502,8 +502,6 @@
+@@ -531,8 +531,6 @@
  
  CLEANFILES=xml2Conf.sh
  
@@ -58,3 +49,14 @@
  EXTRA_DIST = xml2-config.in xml2Conf.sh.in libxml.spec.in libxml.spec \
               libxml.m4 \
               example/Makefile.am example/gjobread.c example/gjobs.xml \
+diff -Nur libxml2-2.4.7.orig/include/libxml/Makefile.am libxml2-2.4.7/include/libxml/Makefile.am
+--- libxml2-2.4.7.orig/include/libxml/Makefile.am	Sun Oct 14 04:35:07 2001
++++ libxml2-2.4.7/include/libxml/Makefile.am	Tue Oct 30 19:06:00 2001
+@@ -33,7 +33,4 @@
+ 		threads.h \
+ 		globals.h
+ 
+-install-exec-hook:
+-	$(mkinstalldirs) $(DESTDIR)$(xmlincdir)
+-
+ EXTRA_DIST = xmlversion.h.in xmlwin32version.h.in
