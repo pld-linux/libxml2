@@ -1,7 +1,7 @@
 Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
-Version:	2.4.4
+Version:	2.4.5
 Release:	1
 License:	LGPL
 Group:		Libraries
@@ -14,6 +14,7 @@ Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
 Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
 Patch0:		%{name}-amfix.patch
+Patch1:		%{name}-man_fixes.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -86,7 +87,8 @@ Parser plikСw XML.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 libtoolize --copy --force
@@ -115,6 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%{_mandir}/man4/*
 
 %files devel
 %defattr(644,root,root,755)
@@ -127,7 +130,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_aclocaldir}/*.m4
 %{_includedir}/libxml2
 %{_mandir}/man1/xml2-config.1*
-%{_mandir}/man4/*
 
 %files static
 %defattr(644,root,root,755)
@@ -135,5 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/xmlcatalog
 %attr(755,root,root) %{_bindir}/xmllint
+%{_mandir}/man1/xmlcatalog.1*
 %{_mandir}/man1/xmllint.1*
