@@ -7,7 +7,7 @@ Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.4.21
-Release:	3
+Release:	4
 License:	MIT
 Group:		Libraries
 Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
@@ -148,7 +148,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO doc/{*.{gif,html},html/*}
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/xml2-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_pkgconfigdir}/*
