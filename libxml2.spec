@@ -47,7 +47,7 @@ Summary(es):	Biblioteca y archivos de inclusión para desarrollo de aplicaciones 
 Summary(pl):	Pliki nag³ówkowe i inne do libxml2
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 Requires:	zlib-devel
 
 %description devel
@@ -71,7 +71,7 @@ Summary(es):	Static libraries to develop libxml applications
 Summary(pl):	Biblioteka statyczna libxml2
 Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 Static libxml2 libraries.
@@ -90,7 +90,7 @@ biblioteca libxml.
 Summary:	XML files parser
 Summary(pl):	Parser plików XML
 Group:		Applications/Text
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description progs
 XML files parser.
@@ -103,7 +103,7 @@ Parser plików XML.
 Summary:	Python support for libxml2
 Summary(pl):	Modu³y jêzyka Python dla biblioteki libxml2
 Group:		Libraries/Python
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 %pyrequires_eq	python-libs
 Obsoletes:	libxml2-python
 
