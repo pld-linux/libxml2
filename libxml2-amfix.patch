@@ -14,8 +14,8 @@ diff -urN libxml2-2.5.10.orig/Makefile.am libxml2-2.5.10/Makefile.am
  bin_SCRIPTS=xml2-config
  
  lib_LTLIBRARIES = libxml2.la
--libxml2_la_LIBADD = @THREAD_LIBS@ @Z_LIBS@ $(ICONV_LIBS) -lm
-+libxml2_la_LIBADD = $(THREAD_LIBS) $(Z_LIBS) $(ICONV_LIBS) -lm
+-libxml2_la_LIBADD = @THREAD_LIBS@ @Z_LIBS@ $(ICONV_LIBS) @M_LIBS@ @WIN32_EXTRA_LIBADD@
++libxml2_la_LIBADD = $(THREAD_LIBS) $(Z_LIBS) $(ICONV_LIBS) $(M_LIBS) $(WIN32_EXTRA_LIBADD)
  
 -libxml2_la_LDFLAGS = -version-info @LIBXML_VERSION_INFO@
 +libxml2_la_LDFLAGS = -version-info $(LIBXML_VERSION_INFO)
@@ -26,8 +26,8 @@ diff -urN libxml2-2.5.10.orig/Makefile.am libxml2-2.5.10/Makefile.am
  endif
  
  DEPS = $(top_builddir)/libxml2.la
--LDADDS = @STATIC_BINARIES@ $(top_builddir)/libxml2.la @THREAD_LIBS@ @Z_LIBS@ $(ICONV_LIBS) -lm @WIN32_EXTRA_LIBADD@
-+LDADDS = $(STATIC_BINARIES) $(top_builddir)/libxml2.la $(THREAD_LIBS) $(Z_LIBS) $(ICONV_LIBS) -lm $(WIN32_EXTRA_LIBADD)
+-LDADDS = @STATIC_BINARIES@ $(top_builddir)/libxml2.la @THREAD_LIBS@ @Z_LIBS@ $(ICONV_LIBS) @M_LIBS@ @WIN32_EXTRA_LIBADD@
++LDADDS = $(STATIC_BINARIES) $(top_builddir)/libxml2.la $(THREAD_LIBS) $(Z_LIBS) $(ICONV_LIBS) $(M_LIBS) $(WIN32_EXTRA_LIBADD)
  
  
  man_MANS = xml2-config.1 libxml.3
