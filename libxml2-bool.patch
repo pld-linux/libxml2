@@ -5,8 +5,8 @@ diff -urN libxml2-2.4.7/include/libxml/debugXML.h libxml2-2.4.7.orig/include/lib
  void	xmlLsOneNode		(FILE *output, xmlNodePtr node);
  int	xmlLsCountNode		(xmlNodePtr node);
  
--const char *xmlBoolToText	(int _bool);
-+const char *xmlBoolToText	(int bool);
++const char *xmlBoolToText	(int _bool);
+-const char *xmlBoolToText	(int bool);
  long	xmlGetLineNo		(xmlNodePtr node);
  
  /****************************************************************
