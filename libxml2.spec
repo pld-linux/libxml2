@@ -14,6 +14,7 @@ Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
+Patch3:		%{name}-DESTDIR.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -114,8 +115,10 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
+rm -f missing
 %{__libtoolize}
 aclocal
 %{__autoconf}
