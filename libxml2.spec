@@ -1,8 +1,8 @@
 Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
-Version:	2.4.0
-Release:	2
+Version:	2.4.1
+Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -57,6 +57,21 @@ Static libxml2 libraries.
 %description -l pl static
 Biblioteka statyczna libxml2.
 
+%package progs
+Summary:	XML files parser
+Summary(pl):	Parser plików XML
+Group:		Applications/Text
+Group(de):	Applikationen/Text
+Group(fr):	Development/Librairies
+Group(pl):	Aplikacje/Tekst
+Requires:	%{name} = %{version}
+
+%description progs
+XML files parser.
+
+%description -l pl progs
+Parser plików XML.
+
 %prep
 %setup -q
 
@@ -86,7 +101,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/xmllint
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
@@ -99,8 +113,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/*
 %{_aclocaldir}/*.m4
 %{_includedir}/libxml
-%{_mandir}/man*/*
+%{_mandir}/man1/xml2-config.1*
+%{_mandir}/man4/*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files progs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/xmllint
+%{_mandir}/man1/xmllint.1*
