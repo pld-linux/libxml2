@@ -1,0 +1,11 @@
+--- libxml2-2.4.3/Makefile.am.orig	Fri Aug 24 01:21:28 2001
++++ libxml2-2.4.3/Makefile.am	Sun Sep  9 02:12:50 2001
+@@ -502,8 +502,6 @@
+ 
+ CLEANFILES=xml2Conf.sh
+ 
+-confexecdir=$(libdir)
+-confexec_DATA = xml2Conf.sh
+ EXTRA_DIST = xml2-config.in xml2Conf.sh.in libxml.spec.in libxml.spec \
+              libxml.m4 \
+              example/Makefile.am example/gjobread.c example/gjobs.xml \

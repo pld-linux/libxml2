@@ -2,14 +2,18 @@ Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
 Version:	2.4.3
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	Библиотеки
+Group(uk):	Б╕бл╕отеки
 Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
+Patch0:		%{name}-amfix.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -30,8 +34,12 @@ Summary:	Header files etc to develop libxml2 applications
 Summary(pl):	Pliki nagЁСwkowe i inne do libxml2
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Requires:	zlib-devel
 
@@ -47,8 +55,12 @@ Summary:	Static libxml2 libraries
 Summary(pl):	Biblioteka statyczna libxml2
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -74,6 +86,7 @@ Parser plikСw XML.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 libtoolize --copy --force
