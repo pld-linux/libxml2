@@ -98,7 +98,7 @@ Parser plików XML.
 Summary:	Python support for libxml2
 Summary(pl):	Modu³y jêzyka Python dla biblioteki libxml2
 Group:		Libraries/Python
-%requires_eq	python
+%pyrequires_eq	python
 Obsoletes:	libxml2-python
 
 %description -n python-%{name}
