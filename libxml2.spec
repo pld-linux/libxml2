@@ -38,7 +38,7 @@ This library allows you to manipulate XML files.
 Esta biblioteca permite manipulación de archivos XML.
 
 %description -l pl
-Biblioteka libxml2 umo¿liwia manipulowaie zawarto¶ci± plików XML.
+Biblioteka libxml2 umo¿liwia manipulowanie zawarto¶ci± plików XML.
 
 %description -l pt_BR
 Esta biblioteca permite a manipulação de arquivos XML.
