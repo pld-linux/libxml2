@@ -7,7 +7,7 @@ Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.4.24
-Release:	3
+Release:	4
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -18,6 +18,7 @@ Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
 Patch3:		%{name}-DESTDIR.patch
 Patch4:		%{name}-urlbound.patch
+Patch5:		%{name}-CAN-2004-0989.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -120,6 +121,7 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
