@@ -182,7 +182,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc %{_docdir}/%{name}-devel-%{version}
-%doc %{_examplesdir}/%{name}-devel-%{version}
 %attr(755,root,root) %{_bindir}/xml2-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
@@ -190,6 +189,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_aclocaldir}/*.m4
 %{_includedir}/libxml2
 %{_mandir}/man1/xml2-config.1*
+%{_examplesdir}/%{name}-devel-%{version}
 
 %files static
 %defattr(644,root,root,755)
