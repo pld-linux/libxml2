@@ -2,10 +2,11 @@ Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
 Version:	2.3.0
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/libxml/%{name}-%{version}.tar.gz
@@ -39,8 +40,8 @@ Requires:	%{name} = %{version}
 Header files etc you can use to develop libxml2 applications.
 
 %description -l pl devel
-Pakiet ten zaziewra pliki nag³ówkowe i inne do libxml2 niezbêdne przy
-tworzeniu aplikacji opartych o t± bibliotekê.
+Pakiet ten zawiera pliki nag³ówkowe i inne do libxml2 niezbêdne przy
+tworzeniu aplikacji opartych o tê bibliotekê.
 
 %package static
 Summary:	Static libxml2 libraries
@@ -67,11 +68,10 @@ Biblioteka statyczna libxml2.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_aclocaldir}
-
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
-
-mv $RPM_BUILD_ROOT%{_datadir}/aclocal/* $RPM_BUILD_ROOT%{_aclocaldir}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	m4datadir=%{_aclocaldir} \
+	pkgconfigdir=%{_pkgconfigdir}
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
@@ -92,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/*.sh
-%{_libdir}/pkgconfig/*
+%{_pkgconfigdir}
 %{_aclocaldir}/*.m4
 %{_includedir}/libxml
 %{_mandir}/man*/*
