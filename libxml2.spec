@@ -11,9 +11,12 @@ Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
 URL:		http://xmlsoft.org/
-BuildRequires:	zlib-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libotool
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel >= 4.2
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,6 +61,10 @@ Biblioteka statyczna libxml2.
 %setup -q
 
 %build
+libtoolize --copy --force
+aclocal
+autoconf
+automake -a -c
 %configure 
 %{__make}
 
