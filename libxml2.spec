@@ -7,7 +7,7 @@ Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.4.22
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
@@ -100,7 +100,7 @@ Summary:	Python support for libxml2
 Summary(pl):	Modu³y jêzyka Python dla biblioteki libxml2
 Group:		Libraries/Python
 Requires:	%{name} = %{version}
-%pyrequires_eq	python
+%pyrequires_eq	python-libs
 Obsoletes:	libxml2-python
 
 %description -n python-%{name}
