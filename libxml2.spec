@@ -1,16 +1,15 @@
 Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
-Version:	2.2.10
+Version:	2.3.0
 Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/libxml2/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/libxml/%{name}-%{version}.tar.gz
 URL:		http://xmlsoft.org/
-Conflicts:	libxml
 Requires:	iconv
 BuildRequires:	iconv
 BuildRequires:	zlib-devel
@@ -93,7 +92,6 @@ gzip -9nf AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/*.sh
 %{_libdir}/pkgconfig/*
-%{_datadir}/gnome-xml
 %{_aclocaldir}/*.m4
 %{_includedir}/libxml
 %{_mandir}/man*/*
