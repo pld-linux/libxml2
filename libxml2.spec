@@ -121,7 +121,7 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %build
 rm -f missing
 %{__libtoolize}
-aclocal
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 %configure
