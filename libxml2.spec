@@ -2,7 +2,7 @@ Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
 Version:	2.3.9
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -32,6 +32,7 @@ Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
+Requires:	zlib-devel
 
 %description devel
 Header files etc you can use to develop libxml2 applications.
