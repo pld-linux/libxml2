@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/*.sh
-%{_pkgconfigdir}
+%{_pkgconfigdir}/*
 %{_aclocaldir}/*.m4
 %{_includedir}/libxml
 %{_mandir}/man*/*
