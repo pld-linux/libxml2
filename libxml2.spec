@@ -2,7 +2,7 @@ Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
 Version:	2.4.7
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -15,6 +15,7 @@ Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
+Patch2:		%{name}-bool.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -89,6 +90,7 @@ Parser plikÛw XML.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 libtoolize --copy --force
