@@ -5,11 +5,11 @@
 %{?with_python:%include	/usr/lib/rpm/macros.python}
 Summary:	libXML library
 Summary(es):	Biblioteca libXML version 2
-Summary(pl):	Biblioteka libxml2
+Summary(pl):	Biblioteka libXML wersja 2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.6.16
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
