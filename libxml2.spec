@@ -11,7 +11,7 @@ Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
-Source0:	http://fr.rpmfind.net/linux/gnome.org/sources/libxml2/2.4/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
 # Source0-md5:	b2dc5525fd6e49d36b90f1e07bac3f34
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
