@@ -9,3 +9,13 @@
  EXTRA_DIST = xml2-config.in xml2Conf.sh.in libxml.spec.in libxml.spec \
               libxml.m4 \
               example/Makefile.am example/gjobread.c example/gjobs.xml \
+--- libxml2-2.4.5/include/libxml/Makefile.am~	Wed Sep 12 22:20:15 2001
++++ libxml2-2.4.5/include/libxml/Makefile.am	Wed Sep 19 19:54:32 2001
+@@ -31,7 +31,4 @@
+ 		DOCBparser.h \
+ 		catalog.h
+ 
+-install-exec-hook:
+-	$(mkinstalldirs) $(DESTDIR)$(xmlincdir)/libxml2 $(DESTDIR)$(xmlincdir)/libxml2/libxml
+-
+ EXTRA_DIST = xmlversion.h.in xmlwin32version.h.in
