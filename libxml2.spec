@@ -13,7 +13,7 @@ Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libotool
+BuildRequires:	libtool
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel >= 4.2
 BuildRequires:	zlib-devel
