@@ -7,7 +7,7 @@ Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.5.10
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
