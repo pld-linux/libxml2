@@ -1,15 +1,16 @@
---- libxml2-2.4.23/Makefile.am.orig	Tue Jul  2 04:35:13 2002
-+++ libxml2-2.4.23/Makefile.am	Tue Jul  9 23:13:35 2002
-@@ -3,7 +3,7 @@
+diff -Nur libxml2-2.4.27.orig/Makefile.am libxml2-2.4.27/Makefile.am
+--- libxml2-2.4.27.orig/Makefile.am	Fri Nov 15 12:05:25 2002
++++ libxml2-2.4.27/Makefile.am	Tue Nov 19 21:40:35 2002
+@@ -5,7 +5,7 @@
  
- SUBDIRS = include . doc example python
+ DIST_SUBDIRS = include . doc example python
  
--INCLUDES = -I@srcdir@/include -I$(top_builddir)/include @THREAD_CFLAGS@ @Z_CFLAGS@ 
-+INCLUDES = -I$(srcdir)/include -I$(top_builddir)/include $(THREAD_CFLAGS) $(Z_CFLAGS)
+-INCLUDES = -I$(top_builddir)/include -I@srcdir@/include @THREAD_CFLAGS@ @Z_CFLAGS@ 
++INCLUDES = -I$(top_builddir)/include -I$(srcdir)/include $(THREAD_CFLAGS) $(Z_CFLAGS)
  
  noinst_PROGRAMS=testSchemas testSAX testHTML testXPath testURI testDocbook \
                  testThreads testC14N testAutomata testRegexp
-@@ -13,9 +13,9 @@
+@@ -15,9 +15,9 @@
  bin_SCRIPTS=xml2-config
  
  lib_LTLIBRARIES = libxml2.la
@@ -21,7 +22,7 @@
  
  if WITH_TRIO_SOURCES
  libxml2_la_SOURCES = SAX.c entities.c encoding.c error.c parserInternals.c  \
-@@ -35,7 +35,7 @@
+@@ -37,7 +37,7 @@
  endif
  
  DEPS = $(top_builddir)/libxml2.la
@@ -30,7 +31,7 @@
  
  man_MANS = xml2-config.1 libxml.3
  
-@@ -45,7 +45,7 @@
+@@ -47,7 +47,7 @@
  xmllint_SOURCES=xmllint.c
  xmllint_LDFLAGS = 
  xmllint_DEPENDENCIES = $(DEPS)
@@ -39,7 +40,7 @@
  
  testSAX_SOURCES=testSAX.c
  testSAX_LDFLAGS = 
-@@ -689,8 +689,6 @@
+@@ -691,8 +691,6 @@
  
  CLEANFILES=xml2Conf.sh
  
@@ -48,13 +49,14 @@
  EXTRA_DIST = xml2-config.in xml2Conf.sh.in libxml.spec.in libxml.spec \
               libxml.m4 Copyright check-xml-test-suite.py \
               example/Makefile.am example/gjobread.c example/gjobs.xml \
---- libxml2-2.4.7.orig/include/libxml/Makefile.am	Sun Oct 14 04:35:07 2001
-+++ libxml2-2.4.7/include/libxml/Makefile.am	Tue Oct 30 19:06:00 2001
-@@ -33,7 +33,4 @@
- 		threads.h \
- 		globals.h
+diff -Nur libxml2-2.4.27.orig/include/libxml/Makefile.am libxml2-2.4.27/include/libxml/Makefile.am
+--- libxml2-2.4.27.orig/include/libxml/Makefile.am	Sun Nov  3 22:55:16 2002
++++ libxml2-2.4.27/include/libxml/Makefile.am	Tue Nov 19 21:41:14 2002
+@@ -39,7 +39,4 @@
+ 		xmlschemastypes.h \
+ 		xmlunicode.h
  
 -install-exec-hook:
 -	$(mkinstalldirs) $(DESTDIR)$(xmlincdir)
 -
- EXTRA_DIST = xmlversion.h.in xmlwin32version.h.in
+ EXTRA_DIST = xmlversion.h.in
