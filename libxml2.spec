@@ -90,7 +90,7 @@ biblioteca libxml.
 
 %package progs
 Summary:	XML files parser
-Summary(pl):	Parser plików XML
+Summary(pl):	Analizator sk³adniowy plików XML
 Group:		Applications/Text
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -98,7 +98,7 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 XML files parser.
 
 %description progs -l pl
-Parser plików XML.
+Analizator sk³adniowy plików XML.
 
 %package -n python-%{name}
 Summary:	Python support for libxml2
