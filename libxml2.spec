@@ -7,7 +7,7 @@ Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.5.8
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -138,6 +138,22 @@ rm -rf $RPM_BUILD_ROOT
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
 
+# move examples to proper dir
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-devel-%{version} \
+	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
+mv $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/examples/* \
+	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-devel-%{version}
+%if %{!?_without_python:1}%{?_without_python:0}
+mv $RPM_BUILD_ROOT%{_docdir}/%{name}-python-%{version}/examples/* \
+	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
+%endif
+
+# move html doc to -devel package
+install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
+mv $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html \
+	$RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
+rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+
 # install catalog file
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
 LD_LIBRARY_PATH=.libs ./xmlcatalog --create \
@@ -156,6 +172,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_mandir}/man3/*
 
@@ -164,7 +181,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc %{_docdir}/%{name}-devel-%{version}
+%doc %{_examplesdir}/%{name}-devel-%{version}
 %attr(755,root,root) %{_bindir}/xml2-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
@@ -187,6 +205,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{!?_without_python:1}%{?_without_python:0}
 %files -n python-%{name}
 %defattr(644,root,root,755)
+%doc %{_examplesdir}/python-%{name}-%{version}
 %attr(755,root,root) %{py_sitedir}/*.so
 %{py_sitedir}/*.py[co]
 %endif
