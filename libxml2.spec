@@ -125,7 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/*.sh
 %{_pkgconfigdir}/*
 %{_aclocaldir}/*.m4
-%{_includedir}/libxml
+%{_includedir}/libxml2
 %{_mandir}/man1/xml2-config.1*
 %{_mandir}/man4/*
 
