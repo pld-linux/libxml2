@@ -1,6 +1,6 @@
-diff -Nur libxml2-2.4.27.orig/Makefile.am libxml2-2.4.27/Makefile.am
---- libxml2-2.4.27.orig/Makefile.am	Fri Nov 15 12:05:25 2002
-+++ libxml2-2.4.27/Makefile.am	Tue Nov 19 21:40:35 2002
+diff -urN libxml2-2.5.4.orig/Makefile.am libxml2-2.5.4/Makefile.am
+--- libxml2-2.5.4.orig/Makefile.am	Mon Feb 24 23:44:42 2003
++++ libxml2-2.5.4/Makefile.am	Mon Feb 24 23:48:00 2003
 @@ -5,7 +5,7 @@
  
  DIST_SUBDIRS = include . doc example python
@@ -8,9 +8,9 @@ diff -Nur libxml2-2.4.27.orig/Makefile.am libxml2-2.4.27/Makefile.am
 -INCLUDES = -I$(top_builddir)/include -I@srcdir@/include @THREAD_CFLAGS@ @Z_CFLAGS@ 
 +INCLUDES = -I$(top_builddir)/include -I$(srcdir)/include $(THREAD_CFLAGS) $(Z_CFLAGS)
  
- noinst_PROGRAMS=testSchemas testSAX testHTML testXPath testURI testDocbook \
-                 testThreads testC14N testAutomata testRegexp
-@@ -15,9 +15,9 @@
+ noinst_PROGRAMS=testSchemas testRelax testSAX testHTML testXPath testURI \
+                 testDocbook testThreads testC14N testAutomata testRegexp \
+@@ -16,9 +16,9 @@
  bin_SCRIPTS=xml2-config
  
  lib_LTLIBRARIES = libxml2.la
@@ -22,16 +22,16 @@ diff -Nur libxml2-2.4.27.orig/Makefile.am libxml2-2.4.27/Makefile.am
  
  if WITH_TRIO_SOURCES
  libxml2_la_SOURCES = SAX.c entities.c encoding.c error.c parserInternals.c  \
-@@ -37,7 +37,7 @@
+@@ -39,7 +39,7 @@
  endif
  
  DEPS = $(top_builddir)/libxml2.la
--LDADDS = $(top_builddir)/libxml2.la @THREAD_LIBS@ @Z_LIBS@ $(ICONV_LIBS) -lm
-+LDADDS = $(top_builddir)/libxml2.la $(THREAD_LIBS) $(Z_LIBS) $(ICONV_LIBS) -lm
+-LDADDS = @STATIC_BINARIES@ $(top_builddir)/libxml2.la @THREAD_LIBS@ @Z_LIBS@ $(ICONV_LIBS) -lm
++LDADDS = $(STATIC_BINARIES) $(top_builddir)/libxml2.la $(THREAD_LIBS) $(Z_LIBS) $(ICONV_LIBS) -lm
  
  man_MANS = xml2-config.1 libxml.3
  
-@@ -47,7 +47,7 @@
+@@ -49,7 +49,7 @@
  xmllint_SOURCES=xmllint.c
  xmllint_LDFLAGS = 
  xmllint_DEPENDENCIES = $(DEPS)
@@ -40,7 +40,7 @@ diff -Nur libxml2-2.4.27.orig/Makefile.am libxml2-2.4.27/Makefile.am
  
  testSAX_SOURCES=testSAX.c
  testSAX_LDFLAGS = 
-@@ -691,8 +691,6 @@
+@@ -750,8 +750,6 @@
  
  CLEANFILES=xml2Conf.sh
  
@@ -48,13 +48,13 @@ diff -Nur libxml2-2.4.27.orig/Makefile.am libxml2-2.4.27/Makefile.am
 -confexec_DATA = xml2Conf.sh
  EXTRA_DIST = xml2-config.in xml2Conf.sh.in libxml.spec.in libxml.spec \
               libxml.m4 Copyright check-xml-test-suite.py \
-              example/Makefile.am example/gjobread.c example/gjobs.xml \
-diff -Nur libxml2-2.4.27.orig/include/libxml/Makefile.am libxml2-2.4.27/include/libxml/Makefile.am
---- libxml2-2.4.27.orig/include/libxml/Makefile.am	Sun Nov  3 22:55:16 2002
-+++ libxml2-2.4.27/include/libxml/Makefile.am	Tue Nov 19 21:41:14 2002
-@@ -39,7 +39,4 @@
- 		xmlschemastypes.h \
- 		xmlunicode.h
+ 	     check-relaxng-test-suite.py check-xinclude-test-suite.py \
+diff -urN libxml2-2.5.4.orig/include/libxml/Makefile.am libxml2-2.5.4/include/libxml/Makefile.am
+--- libxml2-2.5.4.orig/include/libxml/Makefile.am	Mon Feb 24 23:44:42 2003
++++ libxml2-2.5.4/include/libxml/Makefile.am	Mon Feb 24 23:45:08 2003
+@@ -41,7 +41,4 @@
+ 		xmlreader.h \
+ 		relaxng.h
  
 -install-exec-hook:
 -	$(mkinstalldirs) $(DESTDIR)$(xmlincdir)
