@@ -1,8 +1,8 @@
 Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
-Version:	2.3.0
-Release:	2
+Version:	2.3.7
+Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
