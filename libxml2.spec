@@ -6,19 +6,23 @@ Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.4.14
+Version:	2.4.15
 Release:	1
 License:	MIT
 Group:		Libraries
 Group(cs):	Knihovny
+Group(da):	Biblioteker
 Group(de):	Bibliotheken
 Group(es):	Bibliotecas
 Group(fr):	Librairies
+Group(it):	Librerie
 Group(ja):	¥é¥¤¥Ö¥é¥ê
+Group(no):	Biblioteker
 Group(pl):	Biblioteki
 Group(pt):	Bibliotecas
 Group(pt_BR):	Bibliotecas
 Group(ru):	âÉÂÌÉÏÔÅËÉ
+Group(sv):	Bibliotek
 Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
 Patch0:		%{name}-amfix.patch
@@ -54,14 +58,18 @@ Summary(pl):	Pliki nag³ówkowe i inne do libxml2
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
 Group(cs):	Vıvojové prostøedky/Knihovny
+Group(da):	Udvikling/Biblioteker
 Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(it):	Sviluppo/Librerie
 Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
+Group(no):	Utvikling/Bibliotek
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(sv):	Utveckling/Bibliotek
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 Requires:	zlib-devel
@@ -88,14 +96,18 @@ Summary(pl):	Biblioteka statyczna libxml2
 Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
 Group(cs):	Vıvojové prostøedky/Knihovny
+Group(da):	Udvikling/Biblioteker
 Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(it):	Sviluppo/Librerie
 Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
+Group(no):	Utvikling/Bibliotek
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(sv):	Utveckling/Bibliotek
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
@@ -117,13 +129,17 @@ Summary:	XML files parser
 Summary(pl):	Parser plików XML
 Group:		Applications/Text
 Group(cs):	Aplikace/Text
-Group(de):	Anwendungen/Text
+Group(da):	Programmer/Tekst
+Group(de):	Applikationen/Text
 Group(es):	Aplicaciones/Texto
 Group(fr):	Applications/Texte
+Group(it):	Applicazioni/Testo
 Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/¥Æ¥­¥¹¥È
+Group(no):	Applikasjoner/Tekst
 Group(pl):	Aplikacje/Tekst
 Group(pt):	Aplicações/Texto
 Group(ru):	ğÒÉÌÏÖÅÎÉÑ/òÁÂÏÔÁ Ó ÔÅËÓÔÁÍÉ
+Group(sv):	Tillämpningar/Text
 Requires:	%{name} = %{version}
 
 %description progs
@@ -137,14 +153,19 @@ Summary:	Python support for libxml2
 Summary(pl):	Modu³y jêzyka Python dla biblioteki libxml2
 Group:		Development/Languages/Python
 Group(cs):	Vıvojové prostøedky/Programovací jazyky/Python
+Group(da):	Udvikling/Sprog/Python
 Group(de):	Entwicklung/Sprachen/Python
 Group(es):	Desarrollo/Lenguajes/Python
 Group(fr):	Development/Langues/Python
+Group(it):	Sviluppo/Linguaggi/Python
 Group(ja):	³«È¯/¸À¸ì/Python
+Group(no):	Utvikling/Programmeringsspråk/Python
 Group(pl):	Programowanie/Jêzyki/Python
 Group(pt):	Desenvolvimento/Linguagens/Python
 Group(ru):	òÁÚÒÁÂÏÔËÁ/ñÚÙËÉ/Python
+Group(sv):	Utveckling/Språk/Python
 %requires_eq	python
+Obsoletes:	libxml2-python
 
 %description -n python-%{name}
 Python support for libxml2.
