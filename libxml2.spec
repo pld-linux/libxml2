@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%define		_snap	050329
 %bcond_without	python	# don't build python module
 #
 %{?with_python:%include	/usr/lib/rpm/macros.python}
@@ -9,17 +10,18 @@ Summary(pl):	Biblioteka libXML wersja 2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.6.18
-Release:	3
+Release:	3.%{_snap}.1
 Epoch:		1
 License:	MIT
 Group:		Libraries
-Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
-# Source0-md5:	ee5c76a8be34772ccec3f566dc154936
+#Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
+# a cvs snapshot that should be stable
+Source0:	http://ep09.pld-linux.org/~djurban/snap/%{name}-%{_snap}.tar.gz
+# Source0-md5:	2669aa0a0fc95a521ae88dffe73c7bac
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
 Patch3:		%{name}-DESTDIR.patch
-Patch4:		%{name}-gcc4.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.2
 BuildRequires:	automake
@@ -121,7 +123,6 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 %{__libtoolize}
