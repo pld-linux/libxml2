@@ -116,7 +116,7 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 libtoolize --copy --force
 aclocal
 autoconf
-automake -a -c
+automake -a -c -f
 %configure
 %{__make}
 
