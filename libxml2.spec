@@ -116,7 +116,7 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %patch2 -p1
 
 %build
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__autoconf}
 %{__automake}
