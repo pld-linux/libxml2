@@ -19,6 +19,7 @@ Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
 Patch3:		%{name}-DESTDIR.patch
+Patch4:		%{name}-gcc4.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.2
 BuildRequires:	automake
@@ -120,6 +121,7 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}

@@ -1,0 +1,17 @@
+disable invalid aliases to undefined symbols.
+
+--- libxml2-2.6.18/elfgcchack.h.orig	2005-03-08 14:57:55.000000000 +0100
++++ libxml2-2.6.18/elfgcchack.h	2005-03-22 15:29:41.000000000 +0100
+@@ -55,6 +55,7 @@
+ #include "libxml/xpointer.h"
+ #include "libxml/xmlmodule.h"
+ 
++#if 0
+ /* special hot spot not exported ones */
+ 
+ extern __typeof (__xmlGenericError) __xmlGenericError__internal_alias __attribute((visibility("hidden")));
+@@ -7841,3 +7842,4 @@
+ #define xmlXPtrWrapLocationSet xmlXPtrWrapLocationSet__internal_alias
+ #endif
+ 
++#endif /* #if 0 */
