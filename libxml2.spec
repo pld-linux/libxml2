@@ -11,8 +11,6 @@ Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/libxml/%{name}-%{version}.tar.gz
 URL:		http://xmlsoft.org/
-Requires:	iconv
-BuildRequires:	iconv
 BuildRequires:	zlib-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel >= 4.2
