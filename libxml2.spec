@@ -6,7 +6,7 @@ Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.4.16
+Version:	2.4.17
 Release:	1
 License:	MIT
 Group:		Libraries
@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_mandir}/man4/*
+%{_mandir}/man3/*
 
 %files devel
 %defattr(644,root,root,755)
