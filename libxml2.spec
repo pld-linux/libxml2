@@ -50,15 +50,15 @@ Requires:	zlib-devel
 %description devel
 Header files etc you can use to develop libxml2 applications.
 
-%description -l es devel
+%description devel -l es
 Biblioteca y archivos de inclusión para desarrollo de aplicaciones
 libXML.
 
-%description -l pl devel
+%description devel -l pl
 Pakiet ten zawiera pliki nag³ówkowe i inne do libxml2 niezbêdne przy
 tworzeniu aplikacji opartych o tê bibliotekê.
 
-%description -l pt_BR devel
+%description devel -l pt_BR
 Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações
 que usem a biblioteca libxml.
 
@@ -73,13 +73,13 @@ Requires:	%{name}-devel = %{version}
 %description static
 Static libxml2 libraries.
 
-%description -l es static
+%description static -l es
 Static libraries, you can use to develop libxml applications.
 
-%description -l pl static
+%description static -l pl
 Biblioteka statyczna libxml2.
 
-%description -l pt_BR static
+%description static -l pt_BR
 Bibliotecas estáticas para desenvolvimento de aplicações que usem a
 biblioteca libxml.
 
@@ -92,7 +92,7 @@ Requires:	%{name} = %{version}
 %description progs
 XML files parser.
 
-%description -l pl progs
+%description progs -l pl
 Parser plików XML.
 
 %package -n python-%{name}
@@ -119,7 +119,7 @@ libtoolize --copy --force
 aclocal
 autoconf
 automake -a -c
-%configure 
+%configure
 %{__make}
 
 %install
