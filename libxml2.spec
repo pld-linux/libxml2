@@ -8,13 +8,13 @@ Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.6.6
+Version:	2.6.7
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	4aa5c05a92302b50d9a87e7c84527a8e
+# Source0-md5:	bdbef92cbdc5b4bd0365313ba22b75ce
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
@@ -49,7 +49,7 @@ Summary(es):	Biblioteca y archivos de inclusión para desarrollo de aplicaciones 
 Summary(pl):	Pliki nag³ówkowe i inne do libxml2
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	zlib-devel
 
 %description devel
@@ -73,7 +73,7 @@ Summary(es):	Static libraries to develop libxml applications
 Summary(pl):	Biblioteka statyczna libxml2
 Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 Static libxml2 libraries.
@@ -92,7 +92,7 @@ biblioteca libxml.
 Summary:	XML files parser
 Summary(pl):	Parser plików XML
 Group:		Applications/Text
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description progs
 XML files parser.
@@ -104,7 +104,7 @@ Parser plików XML.
 Summary:	Python support for libxml2
 Summary(pl):	Modu³y jêzyka Python dla biblioteki libxml2
 Group:		Libraries/Python
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 %pyrequires_eq	python-libs
 Obsoletes:	libxml2-python
 
