@@ -1,31 +1,33 @@
-
-%{!?_without_python:%include	/usr/lib/rpm/macros.python}
-
+#
+# Conditional build:
+%bcond_without	python	# don't build python module
+#
+%{?with_python:%include	/usr/lib/rpm/macros.python}
 Summary:	libXML library
 Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.6.3
+Version:	2.6.4
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	a99776f3d44c538eaa0317ef4b291340
+# Source0-md5:	1e2339feb10f9b06cefdd7fb57a90923
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
 Patch3:		%{name}-DESTDIR.patch
 URL:		http://xmlsoft.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.2
 BuildRequires:	automake
-BuildRequires:	libtool
+BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	ncurses-devel
-%{!?_without_python:BuildRequires:	python-devel}
-%{!?_without_python:BuildRequires:	python-modules}
+%{?with_python:BuildRequires:	python-devel}
+%{?with_python:BuildRequires:	python-modules}
 BuildRequires:	readline-devel >= 4.2
-%{!?_without_python:BuildRequires:	rpm-pythonprov}
+%{?with_python:BuildRequires:	rpm-pythonprov}
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -98,7 +100,6 @@ XML files parser.
 %description progs -l pl
 Parser plików XML.
 
-%if %{!?_without_python:1}%{?_without_python:0}
 %package -n python-%{name}
 Summary:	Python support for libxml2
 Summary(pl):	Modu³y jêzyka Python dla biblioteki libxml2
@@ -112,7 +113,6 @@ Python support for libxml2.
 
 %description -n python-%{name} -l pl
 Modu³y jêzyka Python dla biblioteki libxml2.
-%endif
 
 %prep
 %setup -q
@@ -122,10 +122,10 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %patch3 -p1
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure
 %{__make}
@@ -143,8 +143,8 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-devel-%{version} \
 	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
 mv $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/examples/* \
 	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-devel-%{version}
-%if %{!?_without_python:1}%{?_without_python:0}
-mv $RPM_BUILD_ROOT%{_docdir}/%{name}-python-%{version}/examples/* \
+%if %{with python}
+mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-python-%{version}/examples/* \
 	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
 %endif
 
@@ -159,9 +159,11 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
 LD_LIBRARY_PATH=.libs ./xmlcatalog --create \
 	> $RPM_BUILD_ROOT%{_sysconfdir}/xml/catalog
 
-%if %{!?_without_python:1}%{?_without_python:0}
+%if %{with python}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
+
+rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{py,la,a}
 %endif
 
 %clean
@@ -202,7 +204,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/xmlcatalog.1*
 %{_mandir}/man1/xmllint.1*
 
-%if %{!?_without_python:1}%{?_without_python:0}
+%if %{with python}
 %files -n python-%{name}
 %defattr(644,root,root,755)
 %doc %{_examplesdir}/python-%{name}-%{version}
