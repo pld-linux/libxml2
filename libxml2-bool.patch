@@ -1,0 +1,12 @@
+diff -urN libxml2-2.4.7/include/libxml/debugXML.h libxml2-2.4.7.orig/include/libxml/debugXML.h
+--- libxml2-2.4.7/include/libxml/debugXML.h	Thu Nov  1 17:48:48 2001
++++ libxml2-2.4.7.orig/include/libxml/debugXML.h	Fri Oct 12 04:35:07 2001
+@@ -50,7 +50,7 @@
+ void	xmlLsOneNode		(FILE *output, xmlNodePtr node);
+ int	xmlLsCountNode		(xmlNodePtr node);
+ 
+-const char *xmlBoolToText	(int _bool);
++const char *xmlBoolToText	(int bool);
+ long	xmlGetLineNo		(xmlNodePtr node);
+ 
+ /****************************************************************
