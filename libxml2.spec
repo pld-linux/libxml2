@@ -8,13 +8,13 @@ Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.6.9
+Version:	2.6.10
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	fe4c008133789d237dfc11b761bcf6a4
+Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
+# Source0-md5:	299da4545913212ec4d82429d74314b9
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
