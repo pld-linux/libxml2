@@ -1,5 +1,5 @@
 
-%include	/usr/lib/rpm/macros.python
+%{!?_without_python:%include	/usr/lib/rpm/macros.python}
 
 Summary:	libXML library
 Summary(es):	Biblioteca libXML version 2
@@ -21,10 +21,10 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel
-BuildRequires:	python-devel
-BuildRequires:	python-modules
+%{!?_without_python:BuildRequires:	python-devel}
+%{!?_without_python:BuildRequires:	python-modules}
 BuildRequires:	readline-devel >= 4.2
-BuildRequires:	rpm-pythonprov
+%{!?_without_python:BuildRequires:	rpm-pythonprov}
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -97,6 +97,7 @@ XML files parser.
 %description progs -l pl
 Parser plików XML.
 
+%if %{!?_without_python:1}%{?_without_python:0}
 %package -n python-%{name}
 Summary:	Python support for libxml2
 Summary(pl):	Modu³y jêzyka Python dla biblioteki libxml2
@@ -110,6 +111,7 @@ Python support for libxml2.
 
 %description -n python-%{name} -l pl
 Modu³y jêzyka Python dla biblioteki libxml2.
+%endif
 
 %prep
 %setup -q
@@ -140,8 +142,10 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
 LD_LIBRARY_PATH=.libs ./xmlcatalog --create \
 	> $RPM_BUILD_ROOT%{_sysconfdir}/xml/catalog
 
+%if %{!?_without_python:1}%{?_without_python:0}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -179,7 +183,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/xmlcatalog.1*
 %{_mandir}/man1/xmllint.1*
 
+%if %{!?_without_python:1}%{?_without_python:0}
 %files -n python-%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
 %{py_sitedir}/*.py[co]
+%endif
