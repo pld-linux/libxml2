@@ -8,3 +8,53 @@
 -	$(mkinstalldirs) $(DESTDIR)$(xmlincdir)
 -
  EXTRA_DIST = xmlversion.h.in xmlwin32version.h.in
+--- libxml2-2.4.6/Makefile.am~	Thu Sep 20 04:35:06 2001
++++ libxml2-2.4.6/Makefile.am	Thu Oct 11 03:39:25 2001
+@@ -5,7 +5,7 @@
+ 
+ SUBDIRS = include . doc example
+ 
+-INCLUDES = -I@srcdir@/include -I$(top_builddir)/include @Z_CFLAGS@ 
++INCLUDES = -I$(srcdir)/include -I$(top_builddir)/include $(Z_CFLAGS)
+ 
+ noinst_PROGRAMS=testSAX testHTML testXPath testURI testDocbook
+ 
+@@ -14,9 +14,9 @@
+ bin_SCRIPTS=xml2-config
+ 
+ lib_LTLIBRARIES = libxml2.la
+-libxml2_la_LIBADD = @Z_LIBS@ $(ICONV_LIBS) -lm
++libxml2_la_LIBADD = $(Z_LIBS) $(ICONV_LIBS) -lm
+ 
+-libxml2_la_LDFLAGS = -version-info @LIBXML_VERSION_INFO@
++libxml2_la_LDFLAGS = -version-info $(LIBXML_VERSION_INFO)
+ 
+ if WITH_TRIO_SOURCES
+ libxml2_la_SOURCES = SAX.c entities.c encoding.c error.c parserInternals.c  \
+@@ -35,7 +35,7 @@
+ endif
+ 
+ DEPS = $(top_builddir)/libxml2.la
+-LDADDS = $(top_builddir)/libxml2.la @Z_LIBS@ $(ICONV_LIBS) -lm
++LDADDS = $(top_builddir)/libxml2.la $(Z_LIBS) $(ICONV_LIBS) -lm
+ 
+ man_MANS = xmllint.1 xml2-config.1 libxml.4
+ 
+@@ -45,7 +45,7 @@
+ xmllint_SOURCES=xmllint.c
+ xmllint_LDFLAGS = 
+ xmllint_DEPENDENCIES = $(DEPS)
+-xmllint_LDADD=  @RDL_LIBS@ $(LDADDS)
++xmllint_LDADD=  $(RDL_LIBS) $(LDADDS)
+ 
+ testSAX_SOURCES=testSAX.c
+ testSAX_LDFLAGS = 
+@@ -502,8 +502,6 @@
+ 
+ CLEANFILES=xml2Conf.sh
+ 
+-confexecdir=$(libdir)
+-confexec_DATA = xml2Conf.sh
+ EXTRA_DIST = xml2-config.in xml2Conf.sh.in libxml.spec.in libxml.spec \
+              libxml.m4 \
+              example/Makefile.am example/gjobread.c example/gjobs.xml \
