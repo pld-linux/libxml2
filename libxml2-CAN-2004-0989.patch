@@ -1,0 +1,33 @@
+CAN-2004-0989 fix: backport of nano* changes between 2.6.14 and 2.6.15
+--- libxml2-2.4.24/nanoftp.c.orig	2004-10-28 11:50:39.000000000 +0200
++++ libxml2-2.4.24/nanoftp.c	2004-10-28 12:15:49.000000000 +0200
+@@ -877,6 +877,9 @@
+     if (hp == NULL)
+         return(-1);
+ 
++    if ((unsigned int) hp->h_length > sizeof(ctxt->ftpAddr.sin_addr))
++	    return(-1); /* gethostbyname address mismatch */
++
+     /*
+      * Prepare the socket
+      */
+--- libxml2-2.4.24/nanohttp.c.orig	2004-10-28 11:50:39.000000000 +0200
++++ libxml2-2.4.24/nanohttp.c	2004-10-28 12:18:41.000000000 +0200
+@@ -917,6 +917,8 @@
+     for (i = 0; h->h_addr_list[i]; i++) {
+         if (h->h_addrtype == AF_INET) {
+             /* A records (IPv4) */
++	    if ((unsigned int) h->h_length > sizeof(ia))
++		return (-1); /* address size mismatch */
+             memcpy(&ia, h->h_addr_list[i], h->h_length);
+             sockin.sin_family = h->h_addrtype;
+             sockin.sin_addr = ia;
+@@ -925,6 +927,8 @@
+ #ifdef SUPPORT_IP6
+         } else if (h->h_addrtype == AF_INET6) {
+             /* AAAA records (IPv6) */
++	    if ((unsigned int) h->h_length > sizeof(ia6))
++		return (-1); /* address size mismatch */
+             memcpy(&ia6, h->h_addr_list[i], h->h_length);
+             sockin6.sin_family = h->h_addrtype;
+             sockin6.sin_addr = ia6;
