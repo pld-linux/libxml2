@@ -31,6 +31,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	readline-devel >= 4.2
+BuildRequires:	rpm-pythonprov
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
