@@ -1,5 +1,7 @@
 Summary:	libXML library
+Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libxml2
+Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.4.10
 Release:	1
@@ -27,12 +29,20 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 This library allows you to manipulate XML files.
 
+%description -l es
+Esta biblioteca permite manipulación de archivos XML.
+
 %description -l pl
 Biblioteka libxml2 umo¿liwia manipulowaie zawarto¶ci± plików XML.
 
+%description -l pt_BR
+Esta biblioteca permite a manipulação de arquivos XML.
+
 %package devel
 Summary:	Header files etc to develop libxml2 applications
+Summary(es):	Biblioteca y archivos de inclusión para desarrollo de aplicaciones libXML
 Summary(pl):	Pliki nag³ówkowe i inne do libxml2
+Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -47,13 +57,23 @@ Requires:	zlib-devel
 %description devel
 Header files etc you can use to develop libxml2 applications.
 
+%description -l es devel
+Biblioteca y archivos de inclusión para desarrollo de aplicaciones
+libXML.
+
 %description -l pl devel
 Pakiet ten zawiera pliki nag³ówkowe i inne do libxml2 niezbêdne przy
 tworzeniu aplikacji opartych o tê bibliotekê.
 
+%description -l pt_BR devel
+Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações
+que usem a biblioteca libxml.
+
 %package static
 Summary:	Static libxml2 libraries
+Summary(es):	Static libraries to develop libxml applications
 Summary(pl):	Biblioteka statyczna libxml2
+Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -67,8 +87,15 @@ Requires:	%{name}-devel = %{version}
 %description static
 Static libxml2 libraries.
 
+%description -l es static
+Static libraries, you can use to develop libxml applications.
+
 %description -l pl static
 Biblioteka statyczna libxml2.
+
+%description -l pt_BR static
+Bibliotecas estáticas para desenvolvimento de aplicações que usem a
+biblioteca libxml.
 
 %package progs
 Summary:	XML files parser
