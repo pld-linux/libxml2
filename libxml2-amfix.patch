@@ -46,9 +46,9 @@ diff -urN libxml2-2.5.10.orig/Makefile.am libxml2-2.5.10/Makefile.am
  
 -confexecdir=$(libdir)
 -confexec_DATA = xml2Conf.sh
+ CVS_EXTRA_DIST=
  EXTRA_DIST = xml2-config.in xml2Conf.sh.in libxml.spec.in libxml2.spec \
               libxml.m4 Copyright check-xml-test-suite.py \
- 	     check-relaxng-test-suite.py check-xinclude-test-suite.py \
 diff -urN libxml2-2.5.10.orig/include/libxml/Makefile.am libxml2-2.5.10/include/libxml/Makefile.am
 --- libxml2-2.5.10.orig/include/libxml/Makefile.am	Fri Aug 15 15:03:34 2003
 +++ libxml2-2.5.10/include/libxml/Makefile.am	Fri Aug 15 15:04:18 2003
