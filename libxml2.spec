@@ -2,7 +2,7 @@ Summary:	libXML library
 Summary(pl):	Biblioteka libxml2
 Name:		libxml2
 Version:	2.4.0
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -86,6 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/xmllint
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
