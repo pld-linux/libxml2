@@ -1,16 +1,22 @@
+
+%include	/usr/lib/rpm/macros.python
+
 Summary:	libXML library
 Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libxml2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.4.13
+Version:	2.4.14
 Release:	1
-License:	LGPL
+License:	MIT
 Group:		Libraries
-Group(de):	Libraries
+Group(cs):	Knihovny
+Group(de):	Bibliotheken
 Group(es):	Bibliotecas
 Group(fr):	Librairies
+Group(ja):	¥é¥¤¥Ö¥é¥ê
 Group(pl):	Biblioteki
+Group(pt):	Bibliotecas
 Group(pt_BR):	Bibliotecas
 Group(ru):	âÉÂÌÉÏÔÅËÉ
 Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
@@ -22,6 +28,8 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel
+BuildRequires:	python-devel
+BuildRequires:	python-modules
 BuildRequires:	readline-devel >= 4.2
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -44,11 +52,14 @@ Summary(es):	Biblioteca y archivos de inclusión para desarrollo de aplicaciones 
 Summary(pl):	Pliki nag³ówkowe i inne do libxml2
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
+Group(cs):	Vıvojové prostøedky/Knihovny
+Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
@@ -75,11 +86,14 @@ Summary(es):	Static libraries to develop libxml applications
 Summary(pl):	Biblioteka statyczna libxml2
 Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
+Group(cs):	Vıvojové prostøedky/Knihovny
+Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
@@ -101,9 +115,14 @@ biblioteca libxml.
 Summary:	XML files parser
 Summary(pl):	Parser plików XML
 Group:		Applications/Text
-Group(de):	Applikationen/Text
-Group(fr):	Development/Librairies
+Group(cs):	Aplikace/Text
+Group(de):	Anwendungen/Text
+Group(es):	Aplicaciones/Texto
+Group(fr):	Applications/Texte
+Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/¥Æ¥­¥¹¥È
 Group(pl):	Aplikacje/Tekst
+Group(pt):	Aplicações/Texto
+Group(ru):	ğÒÉÌÏÖÅÎÉÑ/òÁÂÏÔÁ Ó ÔÅËÓÔÁÍÉ
 Requires:	%{name} = %{version}
 
 %description progs
@@ -111,6 +130,26 @@ XML files parser.
 
 %description -l pl progs
 Parser plików XML.
+
+%package -n python-%{name}
+Summary:	Python support for libxml2
+Summary(pl):	Modu³y jêzyka Python dla biblioteki libxml2
+Group:		Development/Languages/Python
+Group(cs):	Vıvojové prostøedky/Programovací jazyky/Python
+Group(de):	Entwicklung/Sprachen/Python
+Group(es):	Desarrollo/Lenguajes/Python
+Group(fr):	Development/Langues/Python
+Group(ja):	³«È¯/¸À¸ì/Python
+Group(pl):	Programowanie/Jêzyki/Python
+Group(pt):	Desenvolvimento/Linguagens/Python
+Group(ru):	òÁÚÒÁÂÏÔËÁ/ñÚÙËÉ/Python
+%requires_eq	python
+
+%description -n python-%{name}
+Python support for libxml2.
+
+%description -n python-%{name} -l pl
+Modu³y jêzyka Python dla biblioteki libxml2.
 
 %prep
 %setup -q
@@ -132,6 +171,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
+
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
@@ -167,3 +209,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xmllint
 %{_mandir}/man1/xmlcatalog.1*
 %{_mandir}/man1/xmllint.1*
+
+%files -n python-%{name}
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/*.so
+%{py_sitedir}/*.py[co]
