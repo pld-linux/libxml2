@@ -75,7 +75,7 @@ mv $RPM_BUILD_ROOT%{_datadir}/aclocal/* $RPM_BUILD_ROOT%{_aclocaldir}
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
 %clean
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
