@@ -9,7 +9,7 @@ Summary(pl):	Biblioteka libXML wersja 2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.6.19
-Release:	1
+Release:	1.1
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -29,6 +29,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel >= 4.2
 %{?with_python:BuildRequires:	rpm-pythonprov}
 BuildRequires:	zlib-devel
+Obsoletes:	xml-common
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
