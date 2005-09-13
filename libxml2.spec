@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	python	# don't build python module
+%bcond_without	static_libs # don't build static libraries
 #
 %{?with_python:%include	/usr/lib/rpm/macros.python}
 Summary:	libXML library
@@ -8,13 +9,13 @@ Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libXML wersja 2
 Summary(pt_BR):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.6.21
+Version:	2.6.22
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 Source0:	ftp://xmlsoft.org/%{name}-%{version}.tar.gz
-# Source0-md5:	131f2d98ed75ec1dc118783a21104107
+# Source0-md5:	1db8d06b4f49a665a8f47dc6d94450e6
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
@@ -128,7 +129,9 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	%{!?with_static_libs:--enable-static=no}
+	
 %{__make}
 
 %install
@@ -151,9 +154,13 @@ mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-python-%{version}/examples/* \
 
 # move html doc to -devel package
 install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
-mv $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html \
+mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html \
 	$RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
 rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+
+# deal with gtk-doc files
+install -d $RPM_BUILD_ROOT%{_gtkdocdir}
+mv -f $RPM_BUILD_ROOT%{_datadir}/gtk-doc/html/* $RPM_BUILD_ROOT%{_gtkdocdir}
 
 # install catalog file
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
@@ -193,10 +200,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libxml2
 %{_mandir}/man1/xml2-config.1*
 %{_examplesdir}/%{name}-devel-%{version}
+%{_gtkdocdir}/libxml2
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+%endif
 
 %files progs
 %defattr(644,root,root,755)
