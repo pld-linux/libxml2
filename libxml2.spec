@@ -131,7 +131,7 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %{__automake}
 %configure \
 	%{!?with_static_libs:--enable-static=no}
-	
+
 %{__make}
 
 %install
@@ -187,7 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %dir %{_sysconfdir}/xml
-%config(noreplace) %verify(not mtime md5) %{_sysconfdir}/xml/catalog
+%config(noreplace) %verify(not md5 mtime) %{_sysconfdir}/xml/catalog
 
 %files devel
 %defattr(644,root,root,755)
