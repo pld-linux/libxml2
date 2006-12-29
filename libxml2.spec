@@ -24,12 +24,13 @@ URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.2
 BuildRequires:	automake
 BuildRequires:	libtool >= 1:1.4.2-9
-BuildRequires:	ncurses-devel
 %{?with_python:BuildRequires:	python-devel}
 %{?with_python:BuildRequires:	python-modules}
-BuildRequires:	readline-devel >= 4.2
 %{?with_python:BuildRequires:	rpm-pythonprov}
 BuildRequires:	zlib-devel
+# history support in xmllint is disabled by default
+#BuildRequires:	ncurses-devel
+#BuildRequires:	readline-devel >= 4.2
 Obsoletes:	xml-common
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
