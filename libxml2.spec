@@ -3,7 +3,6 @@
 %bcond_without	python	# don't build python module
 %bcond_without	static_libs # don't build static libraries
 #
-%{?with_python:%include	/usr/lib/rpm/macros.python}
 Summary:	libXML library
 Summary(es):	Biblioteca libXML version 2
 Summary(pl):	Biblioteka libXML wersja 2
