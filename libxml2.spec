@@ -27,6 +27,7 @@ BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_python:BuildRequires:	python-devel}
 %{?with_python:BuildRequires:	python-modules}
 %{?with_python:BuildRequires:	rpm-pythonprov}
+BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 # history support in xmllint is disabled by default
 #BuildRequires:	ncurses-devel
@@ -123,6 +124,8 @@ Modu³y jêzyka Python dla biblioteki libxml2.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+
+sed -i -e 's,-L/usr/lib64,-L/usr/%{_lib},' xml2-config.in
 
 %build
 %{__libtoolize}
