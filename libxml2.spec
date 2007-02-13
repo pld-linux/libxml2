@@ -4,9 +4,9 @@
 %bcond_without	static_libs # don't build static libraries
 #
 Summary:	libXML library
-Summary(es.UTF-8):   Biblioteca libXML version 2
-Summary(pl.UTF-8):   Biblioteka libXML wersja 2
-Summary(pt_BR.UTF-8):   Biblioteca libXML versão 2
+Summary(es.UTF-8):	Biblioteca libXML version 2
+Summary(pl.UTF-8):	Biblioteka libXML wersja 2
+Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.6.27
 Release:	2
@@ -49,9 +49,9 @@ Esta biblioteca permite a manipulação de arquivos XML.
 
 %package devel
 Summary:	Header files etc to develop libxml2 applications
-Summary(es.UTF-8):   Biblioteca y archivos de inclusión para desarrollo de aplicaciones libXML
-Summary(pl.UTF-8):   Pliki nagłówkowe i inne do libxml2
-Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
+Summary(es.UTF-8):	Biblioteca y archivos de inclusión para desarrollo de aplicaciones libXML
+Summary(pl.UTF-8):	Pliki nagłówkowe i inne do libxml2
+Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	zlib-devel
@@ -73,9 +73,9 @@ que usem a biblioteca libxml.
 
 %package static
 Summary:	Static libxml2 libraries
-Summary(es.UTF-8):   Static libraries to develop libxml applications
-Summary(pl.UTF-8):   Biblioteka statyczna libxml2
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolvimento de aplicações que usem a biblioteca libxml
+Summary(es.UTF-8):	Static libraries to develop libxml applications
+Summary(pl.UTF-8):	Biblioteka statyczna libxml2
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
@@ -94,7 +94,7 @@ biblioteca libxml.
 
 %package progs
 Summary:	XML files parser
-Summary(pl.UTF-8):   Analizator składniowy plików XML
+Summary(pl.UTF-8):	Analizator składniowy plików XML
 Group:		Applications/Text
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -106,7 +106,7 @@ Analizator składniowy plików XML.
 
 %package -n python-%{name}
 Summary:	Python support for libxml2
-Summary(pl.UTF-8):   Moduły języka Python dla biblioteki libxml2
+Summary(pl.UTF-8):	Moduły języka Python dla biblioteki libxml2
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 %pyrequires_eq	python-libs
