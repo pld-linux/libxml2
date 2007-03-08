@@ -134,7 +134,8 @@ sed -i -e 's,-L/usr/lib64,-L/usr/%{_lib},' xml2-config.in
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_static_libs:--enable-static=no}
+	%{!?with_static_libs:--enable-static=no} \
+	%{!?with_python:--without-python}
 
 %{__make}
 
