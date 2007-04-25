@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.6.27
-Release:	2
+Release:	3
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -91,6 +91,18 @@ Biblioteka statyczna libxml2.
 %description static -l pt_BR.UTF-8
 Bibliotecas estáticas para desenvolvimento de aplicações que usem a
 biblioteca libxml.
+
+%package apidocs
+Summary:	libxml2 API documentation
+Summary(pl.UTF-8):	Dokumentacja API libxml2
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+libxml2 API documentation.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API libxml2.
 
 %package progs
 Summary:	XML files parser
@@ -205,13 +217,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libxml2
 %{_mandir}/man1/xml2-config.1*
 %{_examplesdir}/%{name}-devel-%{version}
-%{_gtkdocdir}/libxml2
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
 %endif
+
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/libxml2
 
 %files progs
 %defattr(644,root,root,755)
