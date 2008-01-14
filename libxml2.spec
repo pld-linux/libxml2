@@ -8,14 +8,14 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.6.30
+Version:	2.6.31
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	http://ftp.gnome.org/pub/GNOME/sources/libxml2/2.6/%{name}-%{version}.tar.bz2
 Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-# Source0-md5:	460e6d853e824da700d698532e57316b
+# Source0-md5:	714b0683b1ec4bdc63bc356d729f9b18
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
@@ -200,8 +200,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog Copyright NEWS README TODO
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_mandir}/man3/*
+%attr(755,root,root) %{_libdir}/libxml2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libxml2.so.2
+%{_mandir}/man3/libxml.3*
 
 %dir %{_sysconfdir}/xml
 %config(noreplace) %verify(not md5 mtime) %{_sysconfdir}/xml/catalog
@@ -210,10 +211,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc %{_docdir}/%{name}-devel-%{version}
 %attr(755,root,root) %{_bindir}/xml2-config
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_pkgconfigdir}/*
-%{_aclocaldir}/*.m4
+%attr(755,root,root) %{_libdir}/libxml2.so
+%{_libdir}/libxml2.la
+%{_pkgconfigdir}/libxml-2.0.pc
+%{_aclocaldir}/libxml.m4
 %{_includedir}/libxml2
 %{_mandir}/man1/xml2-config.1*
 %{_examplesdir}/%{name}-devel-%{version}
@@ -221,7 +222,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libxml2.a
 %endif
 
 %files apidocs
@@ -239,6 +240,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python-%{name}
 %defattr(644,root,root,755)
 %doc %{_examplesdir}/python-%{name}-%{version}
-%attr(755,root,root) %{py_sitedir}/*.so
-%{py_sitedir}/*.py[co]
+%attr(755,root,root) %{py_sitedir}/libxml2mod.so
+%{py_sitedir}/*libxml2.py[co]
 %endif
