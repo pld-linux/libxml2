@@ -1,33 +1,32 @@
 #
 # Conditional build:
-%bcond_without	python	# don't build python module
-%bcond_without	static_libs # don't build static libraries
+%bcond_without	python		# don't build python module
+%bcond_without	static_libs	# don't build static libraries
 #
 Summary:	libXML library
 Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.6.32
+Version:	2.7.1
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	http://ftp.gnome.org/pub/GNOME/sources/libxml2/2.6/%{name}-%{version}.tar.bz2
 Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-# Source0-md5:	2621d322c16f0257e30f0ff2b13384de
+# Source0-md5:	abc093e9ac7ea1aabf37982ae9df6d6c
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
-Patch3:		%{name}-DESTDIR.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.2
-BuildRequires:	automake
+BuildRequires:	automake >= 1.4
 BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_python:BuildRequires:	python-devel}
 %{?with_python:BuildRequires:	python-modules}
 %{?with_python:BuildRequires:	rpm-pythonprov}
-BuildRequires:	sed >= 4.0
+BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	zlib-devel
 # history support in xmllint is disabled by default
 #BuildRequires:	ncurses-devel
@@ -135,9 +134,6 @@ Moduły języka Python dla biblioteki libxml2.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-
-sed -i -e 's,-L/usr/lib64,-L/usr/%{_lib},' xml2-config.in
 
 %build
 %{__libtoolize}
@@ -156,6 +152,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	DEVHELP_DIR=%{_gtkdocdir}/libxml2 \
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
 
@@ -175,10 +172,6 @@ mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html \
 	$RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
 rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 
-# deal with gtk-doc files
-install -d $RPM_BUILD_ROOT%{_gtkdocdir}
-mv -f $RPM_BUILD_ROOT%{_datadir}/gtk-doc/html/* $RPM_BUILD_ROOT%{_gtkdocdir}
-
 # install catalog file
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
 LD_LIBRARY_PATH=.libs ./xmlcatalog --create \
@@ -187,8 +180,8 @@ LD_LIBRARY_PATH=.libs ./xmlcatalog --create \
 %if %{with python}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
-
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{py,la,a}
+%py_postclean
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
 %endif
 
 %clean
@@ -239,7 +232,8 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python}
 %files -n python-%{name}
 %defattr(644,root,root,755)
-%doc %{_examplesdir}/python-%{name}-%{version}
 %attr(755,root,root) %{py_sitedir}/libxml2mod.so
-%{py_sitedir}/*libxml2.py[co]
+%{py_sitedir}/drv_libxml2.py[co]
+%{py_sitedir}/libxml2.py[co]
+%{_examplesdir}/python-%{name}-%{version}
 %endif
