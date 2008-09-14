@@ -181,7 +181,7 @@ LD_LIBRARY_PATH=.libs ./xmlcatalog --create \
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
+%{__rm} -f $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
 %endif
 
 %clean
