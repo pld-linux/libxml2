@@ -1,0 +1,2 @@
+- updated to 2.7.1 (fixes CVE-2008-3281 and CVE-2008-3529)
+- removed obsolete DESTDIR patch
