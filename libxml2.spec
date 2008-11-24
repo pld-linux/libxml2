@@ -202,7 +202,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/libxml.3*
 
 %dir %{_sysconfdir}/xml
-%config(noreplace) %verify(not md5 mtime) %{_sysconfdir}/xml/catalog
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/xml/catalog
 
 %files devel
 %defattr(644,root,root,755)
