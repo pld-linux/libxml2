@@ -10,15 +10,26 @@ diff -Nur libxml2-2.6.17.orig/Makefile.am libxml2-2.6.17/Makefile.am
  
  noinst_PROGRAMS=testSchemas testRelax testSAX testHTML testXPath testURI \
                  testThreads testC14N testAutomata testRegexp \
-@@ -15,9 +15,9 @@
+@@ -16,7 +16,7 @@
  bin_SCRIPTS=xml2-config
  
  lib_LTLIBRARIES = libxml2.la
 -libxml2_la_LIBADD = @THREAD_LIBS@ @Z_LIBS@ $(ICONV_LIBS) @M_LIBS@ @WIN32_EXTRA_LIBADD@
 +libxml2_la_LIBADD = $(THREAD_LIBS) $(Z_LIBS) $(ICONV_LIBS) $(M_LIBS) $(WIN32_EXTRA_LIBADD)
  
--libxml2_la_LDFLAGS = @CYGWIN_EXTRA_LDFLAGS@ @WIN32_EXTRA_LDFLAGS@ -version-info @LIBXML_VERSION_INFO@ @MODULE_PLATFORM_LIBS@
-+libxml2_la_LDFLAGS = $(CYGWIN_EXTRA_LDFLAGS) $(WIN32_EXTRA_LDFLAGS) -version-info $(LIBXML_VERSION_INFO) $(MODULE_PLATFORM_LIBS)
+ if USE_VERSION_SCRIPT
+ LIBXML2_VERSION_SCRIPT = $(VERSION_SCRIPT_FLAGS)$(srcdir)/libxml2.syms
+@@ -24,10 +24,10 @@
+ LIBXML2_VERSION_SCRIPT =
+ endif
+ 
+-libxml2_la_LDFLAGS = @CYGWIN_EXTRA_LDFLAGS@ @WIN32_EXTRA_LDFLAGS@ \
++libxml2_la_LDFLAGS = $(CYGWIN_EXTRA_LDFLAGS) $(WIN32_EXTRA_LDFLAGS) \
+                      $(LIBXML2_VERSION_SCRIPT) \
+-		     -version-info @LIBXML_VERSION_INFO@ \
+-		     @MODULE_PLATFORM_LIBS@
++		     -version-info $(LIBXML_VERSION_INFO) \
++		     $(MODULE_PLATFORM_LIBS)
  
  if WITH_TRIO_SOURCES
  libxml2_la_SOURCES = SAX.c entities.c encoding.c error.c parserInternals.c  \
