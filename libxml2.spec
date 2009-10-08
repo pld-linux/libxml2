@@ -2,6 +2,11 @@
 # Conditional build:
 %bcond_without	python		# don't build python module
 %bcond_without	static_libs	# don't build static libraries
+%bcond_without	zlib		# don't use zlib
+#
+%ifarch x86_64
+%undefine with_zlib
+%endif
 #
 Summary:	libXML library
 Summary(es.UTF-8):	Biblioteca libXML version 2
@@ -9,7 +14,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.7.6
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -27,7 +32,7 @@ BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_python:BuildRequires:	python-modules}
 %{?with_python:BuildRequires:	rpm-pythonprov}
 BuildRequires:	rpmbuild(macros) >= 1.219
-BuildRequires:	zlib-devel
+%{?with_zlib:BuildRequires:	zlib-devel}
 # history support in xmllint is disabled by default
 #BuildRequires:	ncurses-devel
 #BuildRequires:	readline-devel >= 4.2
@@ -54,6 +59,7 @@ Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento d
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	zlib-devel
+%{?with_zlib:BuildRequires:	zlib-devel}
 
 %description devel
 Header files etc you can use to develop libxml2 applications.
@@ -133,7 +139,9 @@ Moduły języka Python dla biblioteki libxml2.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%if %{with zlib}
 %patch2 -p1
+%endif
 
 %build
 %{__libtoolize}
@@ -143,7 +151,8 @@ Moduły języka Python dla biblioteki libxml2.
 %{__automake}
 %configure \
 	%{!?with_static_libs:--enable-static=no} \
-	%{!?with_python:--without-python}
+	%{!?with_python:--without-python} \
+	%{!?with_zlib:--with-zlib=no}
 
 %{__make}
 
