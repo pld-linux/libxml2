@@ -4,10 +4,6 @@
 %bcond_without	static_libs	# don't build static libraries
 %bcond_without	zlib		# don't use zlib
 #
-%ifarch x86_64
-%undefine with_zlib
-%endif
-#
 Summary:	libXML library
 Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
