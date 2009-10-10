@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.7.6
-Release:	3
+Release:	4
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -20,6 +20,7 @@ Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-man_fixes.patch
 Patch2:		%{name}-open.gz.patch
+Patch3:		%{name}-largefile.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.2
 BuildRequires:	automake >= 1.4
@@ -138,6 +139,7 @@ Moduły języka Python dla biblioteki libxml2.
 %if %{with zlib}
 %patch2 -p1
 %endif
+%patch3 -p1
 
 %build
 %{__libtoolize}
