@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.7.6
-Release:	4
+Release:	5
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -29,11 +29,12 @@ BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_python:BuildRequires:	python-modules}
 %{?with_python:BuildRequires:	rpm-pythonprov}
 BuildRequires:	rpmbuild(macros) >= 1.219
-%{?with_zlib:BuildRequires:	zlib-devel}
+%{?with_zlib:BuildRequires:	zlib-devel >= 1.2.3.3}
 # history support in xmllint is disabled by default
 #BuildRequires:	ncurses-devel
 #BuildRequires:	readline-devel >= 4.2
 Obsoletes:	xml-common
+Requires:	zlib >= 1.2.3.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
