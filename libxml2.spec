@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.7.7
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -172,6 +172,9 @@ mv $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/examples/* \
 %if %{with python}
 mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-python-%{version}/examples/* \
 	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
+cd python
+./setup.py install_egg_info --install-dir=$RPM_BUILD_ROOT%{py_sitedir}
+cd ..
 %endif
 
 # move html doc to -devel package
@@ -243,5 +246,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/libxml2mod.so
 %{py_sitedir}/drv_libxml2.py[co]
 %{py_sitedir}/libxml2.py[co]
+%{py_sitedir}/libxml2_python-*.egg-info
 %{_examplesdir}/python-%{name}-%{version}
 %endif
