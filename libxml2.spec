@@ -1,9 +1,10 @@
 #
 # Conditional build:
+%bcond_without	apidocs		# do not build and package API docs
 %bcond_without	python		# don't build python module
 %bcond_without	static_libs	# don't build static libraries
 %bcond_without	zlib		# don't use zlib
-#
+
 Summary:	libXML library
 Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
@@ -229,9 +230,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libxml2.a
 %endif
 
+%if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/libxml2
+%endif
 
 %files progs
 %defattr(644,root,root,755)
