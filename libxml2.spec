@@ -1,3 +1,5 @@
+# TODO:
+# - fix build without libxml2-devel (python library uses old headers)
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
@@ -34,8 +36,8 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 # history support in xmllint is disabled by default
 #BuildRequires:	ncurses-devel
 #BuildRequires:	readline-devel >= 4.2
-Obsoletes:	xml-common
 Requires:	zlib >= 1.2.3.3
+Obsoletes:	xml-common
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,7 +60,6 @@ Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento d
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	zlib-devel
-%{?with_zlib:BuildRequires:	zlib-devel}
 
 %description devel
 Header files etc you can use to develop libxml2 applications.
