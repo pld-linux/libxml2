@@ -171,12 +171,16 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-devel-%{version} \
 	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
 mv $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/examples/* \
 	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-devel-%{version}
+
 %if %{with python}
 mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-python-%{version}/examples/* \
 	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
+
+%if "%{py_ver}" > "2.4"
 cd python
 ./setup.py install_egg_info --install-dir=$RPM_BUILD_ROOT%{py_sitedir}
 cd ..
+%endif
 %endif
 
 # move html doc to -devel package
@@ -250,6 +254,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/libxml2mod.so
 %{py_sitedir}/drv_libxml2.py[co]
 %{py_sitedir}/libxml2.py[co]
+%if "%{py_ver}" > "2.4"
 %{py_sitedir}/libxml2_python-*.egg-info
+%endif
 %{_examplesdir}/python-%{name}-%{version}
 %endif
