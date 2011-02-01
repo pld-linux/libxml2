@@ -6,6 +6,7 @@
 %bcond_without	python		# don't build python module
 %bcond_without	static_libs	# don't build static libraries
 %bcond_without	zlib		# don't use zlib
+%bcond_with	mem_debug	# enable libxml2 memory debuging
 
 Summary:	libXML library
 Summary(es.UTF-8):	Biblioteca libXML version 2
@@ -155,7 +156,8 @@ Moduły języka Python dla biblioteki libxml2.
 %configure \
 	%{!?with_static_libs:--enable-static=no} \
 	%{!?with_python:--without-python} \
-	%{!?with_zlib:--with-zlib=no}
+	%{!?with_zlib:--with-zlib=no} \
+	--with%{!?with_mem_debug:out}-mem-debug
 
 %{__make}
 
