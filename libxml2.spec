@@ -13,22 +13,19 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.7.8
-Release:	2
+Version:	2.8.0
+Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	http://ftp.gnome.org/pub/GNOME/sources/libxml2/2.6/%{name}-%{version}.tar.bz2
 Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-# Source0-md5:	8127a65e8c3b08856093099b52599c86
-Patch0:		%{name}-amfix.patch
-Patch1:		%{name}-man_fixes.patch
-Patch2:		%{name}-open.gz.patch
-Patch3:		%{name}-largefile.patch
-Patch4:		%{name}-version-script.patch
-Patch5:		%{name}-XPath.patch
+# Source0-md5:	c62106f02ee00b6437f0fb9d370c1093
+Patch0:		%{name}-man_fixes.patch
+Patch1:		%{name}-open.gz.patch
+Patch2:		%{name}-largefile.patch
 URL:		http://xmlsoft.org/
-BuildRequires:	autoconf >= 2.2
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1.4
 BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_python:BuildRequires:	python-devel}
@@ -141,13 +138,10 @@ Moduły języka Python dla biblioteki libxml2.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 %if %{with zlib}
-%patch2 -p1
+%patch1 -p1
 %endif
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -156,9 +150,10 @@ Moduły języka Python dla biblioteki libxml2.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_static_libs:--enable-static=no} \
+	--disable-silent-rules \
+	%{!?with_static_libs:--disable-static=no} \
 	%{!?with_python:--without-python} \
-	%{!?with_zlib:--with-zlib=no} \
+	%{!?with_zlib:--without-zlib} \
 	--with%{!?with_mem_debug:out}-mem-debug
 
 %{__make}
@@ -229,6 +224,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xml2-config
 %attr(755,root,root) %{_libdir}/libxml2.so
 %{_libdir}/libxml2.la
+%attr(755,root,root) %{_libdir}/xml2Conf.sh
 %{_pkgconfigdir}/libxml-2.0.pc
 %{_aclocaldir}/libxml.m4
 %{_includedir}/libxml2
