@@ -25,9 +25,9 @@ Patch0:		%{name}-man_fixes.patch
 Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
 URL:		http://xmlsoft.org/
-BuildRequires:	autoconf >= 2.59
+BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
-BuildRequires:	libtool >= 1:1.4.2-9
+BuildRequires:	libtool >= 2:2.0
 %{?with_python:BuildRequires:	python-devel}
 %{?with_python:BuildRequires:	python-modules}
 %{?with_python:BuildRequires:	rpm-pythonprov}
