@@ -13,18 +13,17 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.8.0
-Release:	2
+Version:	2.9.0
+Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	http://ftp.gnome.org/pub/GNOME/sources/libxml2/2.6/%{name}-%{version}.tar.bz2
 Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-# Source0-md5:	c62106f02ee00b6437f0fb9d370c1093
+# Source0-md5:	5b9bebf4f5d2200ae2c4efe8fa6103f7
 Patch0:		%{name}-man_fixes.patch
 Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
-Patch3:		%{name}-CVE-2012-2807.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1.4
@@ -33,6 +32,7 @@ BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_python:BuildRequires:	python-modules}
 %{?with_python:BuildRequires:	rpm-pythonprov}
 BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	xz-devel
 %{?with_zlib:BuildRequires:	zlib-devel >= 1.2.3.3}
 # history support in xmllint is disabled by default
 #BuildRequires:	ncurses-devel
@@ -143,7 +143,6 @@ Moduły języka Python dla biblioteki libxml2.
 %patch1 -p1
 %endif
 %patch2 -p1
-%patch3 -p1
 
 %build
 %{__libtoolize}
@@ -156,6 +155,7 @@ Moduły języka Python dla biblioteki libxml2.
 	%{!?with_static_libs:--disable-static=no} \
 	%{!?with_python:--without-python} \
 	%{!?with_zlib:--without-zlib} \
+	--with-lzma \
 	--with%{!?with_mem_debug:out}-mem-debug
 
 %{__make}
@@ -165,7 +165,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	DEVHELP_DIR=%{_gtkdocdir}/libxml2 \
+	devhelpdir=%{_gtkdocdir}/libxml2 \
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
 
