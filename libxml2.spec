@@ -60,6 +60,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe i inne do libxml2
 Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	xz-devel
 Requires:	zlib-devel
 
 %description devel
