@@ -3,24 +3,26 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
-%bcond_without	python		# don't build python module
+%bcond_without	python2		# don't build python module
+%bcond_without	python3		# python3
 %bcond_without	static_libs	# don't build static libraries
 %bcond_without	zlib		# don't use zlib
 %bcond_with	mem_debug	# enable libxml2 memory debuging
+%bcond_without	tests
 
 Summary:	libXML library version 2
 Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.9.1
+Version:	2.9.2
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	http://ftp.gnome.org/pub/GNOME/sources/libxml2/2.6/%{name}-%{version}.tar.bz2
 Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-# Source0-md5:	9c0cfef285d5c4a5c80d00904ddab380
+# Source0-md5:	9e6a9aca9d155737868b3dc5fd82f788
 Patch0:		%{name}-man_fixes.patch
 Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
@@ -28,9 +30,17 @@ URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
 BuildRequires:	libtool >= 2:2.0
-%{?with_python:BuildRequires:	python-devel}
-%{?with_python:BuildRequires:	python-modules}
-%{?with_python:BuildRequires:	rpm-pythonprov}
+%if %{with python2}
+BuildRequires:	python-devel
+BuildRequires:	python-modules
+BuildRequires:	rpm-pythonprov
+%endif
+%if %{with python3}
+BuildRequires:	python3-devel
+BuildRequires:	python3-distribute
+BuildRequires:	python3-modules
+BuildRequires:	rpm-pythonprov
+%endif
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	xz-devel
 %{?with_zlib:BuildRequires:	zlib-devel >= 1.2.3.3}
@@ -128,7 +138,7 @@ Summary:	Python support for libxml2
 Summary(pl.UTF-8):	Moduły języka Python dla biblioteki libxml2
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-%pyrequires_eq	python-libs
+Requires:	python-libs
 Obsoletes:	libxml2-python
 
 %description -n python-%{name}
@@ -136,6 +146,19 @@ Python support for libxml2.
 
 %description -n python-%{name} -l pl.UTF-8
 Moduły języka Python dla biblioteki libxml2.
+
+%package -n python3-%{name}
+Summary:	Python 3 support for libxml2
+Summary(pl.UTF-8):	Moduły języka Python 3 dla biblioteki libxml2
+Group:		Libraries/Python
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	python3-libs
+
+%description -n python3-%{name}
+Python 3 support for libxml2.
+
+%description -n python3-%{name} -l pl.UTF-8
+Moduły języka Python 3 dla biblioteki libxml2.
 
 %prep
 %setup -q
@@ -154,12 +177,33 @@ Moduły języka Python dla biblioteki libxml2.
 %configure \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static=no} \
-	%{!?with_python:--without-python} \
+	--without-python \
 	%{!?with_zlib:--without-zlib} \
 	--with-lzma \
 	--with%{!?with_mem_debug:out}-mem-debug
 
 %{__make}
+
+%if %{with python2}
+cd python
+CC="%{__cc}" \
+CFLAGS="%{rpmcppflags} %{rpmcflags}" \
+%{__python} setup.py build --build-base build-2 %{?with_tests:test}
+cd ..
+%endif
+
+
+%if %{with python3}
+cd python
+CC="%{__cc}" \
+CFLAGS="%{rpmcppflags} %{rpmcflags}" \
+%{__python3} setup.py build --build-base build-3 %{?with_tests:test}
+cd ..
+%endif
+
+%if %{with tests}
+%{__make} check
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -170,21 +214,34 @@ rm -rf $RPM_BUILD_ROOT
 	m4datadir=%{_aclocaldir} \
 	pkgconfigdir=%{_pkgconfigdir}
 
-# move examples to proper dir
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-devel-%{version} \
-	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
-mv $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/examples/* \
-	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-devel-%{version}
-
-%if %{with python}
-mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-python-%{version}/examples/* \
-	$RPM_BUILD_ROOT%{_examplesdir}/python-%{name}-%{version}
+%if %{with python2}
+cd python
+%{__python} setup.py \
+	build --build-base build-2 \
+	install --skip-build \
+	--optimize=2 \
+	--root=$RPM_BUILD_ROOT
 
 %if "%{py_ver}" > "2.4"
-cd python
-./setup.py install_egg_info --install-dir=$RPM_BUILD_ROOT%{py_sitedir}
+%{__python} setup.py install_egg_info \
+	--install-dir=$RPM_BUILD_ROOT%{py_sitedir}
+%endif
+
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%py_postclean
+rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
 cd ..
 %endif
+
+%if %{with python3}
+cd python
+%{__python3} setup.py \
+	build --build-base build-3 \
+	install --skip-build \
+	--optimize=2 \
+	--root=$RPM_BUILD_ROOT
+cd ..
 %endif
 
 # move html doc to -devel package
@@ -197,13 +254,6 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
 LD_LIBRARY_PATH=.libs ./xmlcatalog --create \
 	> $RPM_BUILD_ROOT%{_sysconfdir}/xml/catalog
-
-%if %{with python}
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}
-%py_postclean
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -228,11 +278,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libxml2.so
 %{_libdir}/libxml2.la
 %attr(755,root,root) %{_libdir}/xml2Conf.sh
+%{_libdir}/cmake/libxml2
 %{_pkgconfigdir}/libxml-2.0.pc
 %{_aclocaldir}/libxml.m4
 %{_includedir}/libxml2
 %{_mandir}/man1/xml2-config.1*
-%{_examplesdir}/%{name}-devel-%{version}
 
 %if %{with static_libs}
 %files static
@@ -253,7 +303,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/xmlcatalog.1*
 %{_mandir}/man1/xmllint.1*
 
-%if %{with python}
+%if %{with python2}
 %files -n python-%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/libxml2mod.so
@@ -262,5 +312,14 @@ rm -rf $RPM_BUILD_ROOT
 %if "%{py_ver}" > "2.4"
 %{py_sitedir}/libxml2_python-*.egg-info
 %endif
-%{_examplesdir}/python-%{name}-%{version}
+%endif
+
+%if %{with python3}
+%files -n python3-%{name}
+%defattr(644,root,root,755)
+%{py3_sitedir}/__pycache__/*.py[co]
+%{py3_sitedir}/drv_libxml2.py
+%{py3_sitedir}/libxml2.py
+%{py3_sitedir}/libxml2_python-%{version}-py*.egg-info
+%attr(755,root,root) %{py3_sitedir}/libxml2mod.cpython-*.so
 %endif
