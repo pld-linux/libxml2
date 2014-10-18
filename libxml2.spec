@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.9.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -188,7 +188,7 @@ Moduły języka Python 3 dla biblioteki libxml2.
 cd python
 CC="%{__cc}" \
 CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-%{__python} setup.py build --build-base build-2 %{?with_tests:test}
+%{__python} setup.py build --build-base build-2
 cd ..
 %endif
 
@@ -197,7 +197,7 @@ cd ..
 cd python
 CC="%{__cc}" \
 CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-%{__python3} setup.py build --build-base build-3 %{?with_tests:test}
+%{__python3} setup.py build --build-base build-3
 cd ..
 %endif
 
