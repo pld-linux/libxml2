@@ -3,12 +3,12 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
-%bcond_without	python2		# don't build python module
-%bcond_without	python3		# python3
-%bcond_without	static_libs	# don't build static libraries
-%bcond_without	zlib		# don't use zlib
-%bcond_with	mem_debug	# enable libxml2 memory debuging
-%bcond_without	tests
+%bcond_without	python2		# CPython 2.x module
+%bcond_without	python3		# CPython 3.x module
+%bcond_without	static_libs	# static library
+%bcond_without	zlib		# zlib support
+%bcond_with	mem_debug	# libxml2 memory debuging
+%bcond_without	tests		# "make check" call
 
 Summary:	libXML library version 2
 Summary(es.UTF-8):	Biblioteca libXML version 2
@@ -31,14 +31,14 @@ BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
 BuildRequires:	libtool >= 2:2.0
 %if %{with python2}
-BuildRequires:	python-devel
-BuildRequires:	python-modules
+BuildRequires:	python-devel >= 2.0
+BuildRequires:	python-modules >= 2.0
 BuildRequires:	rpm-pythonprov
 %endif
 %if %{with python3}
-BuildRequires:	python3-devel
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-distribute
-BuildRequires:	python3-modules
+BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	rpm-pythonprov
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -134,31 +134,35 @@ XML files parser.
 Analizator składniowy plików XML.
 
 %package -n python-%{name}
-Summary:	Python support for libxml2
-Summary(pl.UTF-8):	Moduły języka Python dla biblioteki libxml2
+Summary:	libxml2 module for Python 2.x
+Summary(pl.UTF-8):	Moduł libxml2 dla Pythona 2.x
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-libs
 Obsoletes:	libxml2-python
 
 %description -n python-%{name}
-Python support for libxml2.
+This is the libxml2 module for Python 2.x, providing access to the
+libxml2 library.
 
 %description -n python-%{name} -l pl.UTF-8
-Moduły języka Python dla biblioteki libxml2.
+Ten pakiet zawiera moduł libxml2 dla Pythona 2.x, zapewniający
+dostęp do biblioteki libxml2.
 
 %package -n python3-%{name}
-Summary:	Python 3 support for libxml2
-Summary(pl.UTF-8):	Moduły języka Python 3 dla biblioteki libxml2
+Summary:	libxml2 module for Python 3.x
+Summary(pl.UTF-8):	Moduł libxml2 dla Pythona 3.x
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python3-libs
 
 %description -n python3-%{name}
-Python 3 support for libxml2.
+This is the libxml2 module for Python 3.x, providing access to the
+libxml2 library.
 
 %description -n python3-%{name} -l pl.UTF-8
-Moduły języka Python 3 dla biblioteki libxml2.
+Ten pakiet zawiera moduł libxml2 dla Pythona 3.x, zapewniający
+dostęp do biblioteki libxml2.
 
 %prep
 %setup -q
@@ -222,15 +226,7 @@ cd python
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
-%if "%{py_ver}" > "2.4"
-%{__python} setup.py install_egg_info \
-	--install-dir=$RPM_BUILD_ROOT%{py_sitedir}
-%endif
-
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
 cd ..
 %endif
 
@@ -246,9 +242,9 @@ cd ..
 
 # move html doc to -devel package
 install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
-mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html \
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html \
 	$RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
-rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 
 # install catalog file
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
