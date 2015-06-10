@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.9.2
-Release:	4
+Release:	5
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -26,6 +26,7 @@ Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
 Patch0:		%{name}-man_fixes.patch
 Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
+Patch3:		%{name}-xmlcatalog-regression.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
@@ -37,7 +38,6 @@ BuildRequires:	rpm-pythonprov
 %endif
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3.2
-BuildRequires:	python3-distribute
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	rpm-pythonprov
 %endif
@@ -171,6 +171,7 @@ dostęp do biblioteki libxml2.
 %patch1 -p1
 %endif
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
