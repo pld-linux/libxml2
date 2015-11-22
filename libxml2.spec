@@ -15,18 +15,17 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.9.2
-Release:	6
+Version:	2.9.3
+Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	http://ftp.gnome.org/pub/GNOME/sources/libxml2/2.6/%{name}-%{version}.tar.bz2
 Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-# Source0-md5:	9e6a9aca9d155737868b3dc5fd82f788
+# Source0-md5:	daece17e045f1c107610e137ab50c179
 Patch0:		%{name}-man_fixes.patch
 Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
-Patch3:		%{name}-xmlcatalog-regression.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
@@ -171,7 +170,6 @@ dostęp do biblioteki libxml2.
 %patch1 -p1
 %endif
 %patch2 -p1
-%patch3 -p1
 
 %build
 %{__libtoolize}
