@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.9.3
-Release:	3
+Release:	4
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -40,7 +40,7 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	rpm-pythonprov
 %endif
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	xz-devel
 %{?with_zlib:BuildRequires:	zlib-devel >= 1.2.3.3}
 # history support in xmllint is disabled by default
@@ -189,18 +189,14 @@ dostęp do biblioteki libxml2.
 
 %if %{with python2}
 cd python
-CC="%{__cc}" \
-CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-%{__python} setup.py build --build-base build-2
+%py_build
 cd ..
 %endif
 
 
 %if %{with python3}
 cd python
-CC="%{__cc}" \
-CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-%{__python3} setup.py build --build-base build-3
+%py3_build
 cd ..
 %endif
 
@@ -219,11 +215,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with python2}
 cd python
-%{__python} setup.py \
-	build --build-base build-2 \
-	install --skip-build \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py_install
 
 %py_postclean
 cd ..
@@ -231,11 +223,7 @@ cd ..
 
 %if %{with python3}
 cd python
-%{__python3} setup.py \
-	build --build-base build-3 \
-	install --skip-build \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py3_install
 cd ..
 %endif
 
