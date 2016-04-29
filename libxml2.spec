@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.9.3
-Release:	4
+Release:	5
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -113,6 +113,9 @@ Summary:	libxml2 API documentation
 Summary(pl.UTF-8):	Dokumentacja API libxml2
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 libxml2 API documentation.
@@ -145,8 +148,8 @@ This is the libxml2 module for Python 2.x, providing access to the
 libxml2 library.
 
 %description -n python-%{name} -l pl.UTF-8
-Ten pakiet zawiera moduł libxml2 dla Pythona 2.x, zapewniający
-dostęp do biblioteki libxml2.
+Ten pakiet zawiera moduł libxml2 dla Pythona 2.x, zapewniający dostęp
+do biblioteki libxml2.
 
 %package -n python3-%{name}
 Summary:	libxml2 module for Python 3.x
@@ -160,8 +163,8 @@ This is the libxml2 module for Python 3.x, providing access to the
 libxml2 library.
 
 %description -n python3-%{name} -l pl.UTF-8
-Ten pakiet zawiera moduł libxml2 dla Pythona 3.x, zapewniający
-dostęp do biblioteki libxml2.
+Ten pakiet zawiera moduł libxml2 dla Pythona 3.x, zapewniający dostęp
+do biblioteki libxml2.
 
 %prep
 %setup -q
