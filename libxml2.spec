@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.9.4
-Release:	2
+Release:	3
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -28,6 +28,7 @@ Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
 # https://git.gnome.org/browse/libxml2/patch/?id=3169602058bd2d04913909e869c61d1540bc7fb4
 Patch3:		%{name}-schema.patch
+Patch4:		%{name}-libx32.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
@@ -176,6 +177,7 @@ do biblioteki libxml2.
 %endif
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}
