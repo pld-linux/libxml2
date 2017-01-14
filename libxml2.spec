@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.9.4
-Release:	4
+Release:	5
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -29,6 +29,8 @@ Patch2:		%{name}-largefile.patch
 # https://git.gnome.org/browse/libxml2/patch/?id=3169602058bd2d04913909e869c61d1540bc7fb4
 Patch3:		%{name}-schema.patch
 Patch4:		%{name}-libx32.patch
+Patch5:		http://pkgs.fedoraproject.org/cgit/rpms/libxml2.git/plain/libxml2-2.9.4-remove-pyverify_fd.patch
+# Patch5-md5:	be948499ae913253ad06ae2b0d0c2f12
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
@@ -178,6 +180,7 @@ do biblioteki libxml2.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
