@@ -27,7 +27,6 @@ Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
 
 Patch4:		%{name}-libx32.patch
-# Patch5-md5:	be948499ae913253ad06ae2b0d0c2f12
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
