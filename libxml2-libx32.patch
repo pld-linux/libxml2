@@ -1,11 +1,11 @@
---- libxml2-2.9.4/xml2-config.in.orig	2016-02-09 11:17:34.000000000 +0100
-+++ libxml2-2.9.4/xml2-config.in	2016-12-19 18:13:49.457475354 +0100
-@@ -84,7 +84,7 @@
-     --libs)
-         if [ "`uname`" = "Linux" ]
- 	then
--	    if [ "@XML_LIBDIR@" = "-L/usr/lib" -o "@XML_LIBDIR@" = "-L/usr/lib64" ]
-+	    if [ "@XML_LIBDIR@" = "-L/usr/lib" -o "@XML_LIBDIR@" = "-L/usr/lib64" -o "@XML_LIBDIR@" = "-L/usr/libx32" ]
- 	    then
- 		echo @XML_LIBS@ @MODULE_PLATFORM_LIBS@
- 	    else
+--- libxml2-2.9.10/xml2-config.in.orig	2020-01-19 17:14:27.721696222 +0100
++++ libxml2-2.9.10/xml2-config.in	2020-01-19 17:22:13.425839953 +0100
+@@ -87,7 +87,7 @@
+             libs="@XML_LIBS@ @XML_PRIVATE_LIBS@ @MODULE_PLATFORM_LIBS@"
+         fi
+ 
+-        if [ "@XML_LIBDIR@" != "-L/usr/lib" -a "@XML_LIBDIR@" != "-L/usr/lib64" ]; then
++        if [ "@XML_LIBDIR@" != "-L/usr/lib" -a "@XML_LIBDIR@" != "-L/usr/lib64" -a "@XML_LIBDIR@" != "-L/usr/libx32" ]; then
+             libs="@XML_LIBDIR@ $libs"
+         fi
+ 
