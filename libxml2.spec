@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.9.10
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -25,8 +25,18 @@ Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
 Patch0:		%{name}-man_fixes.patch
 Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
-
-Patch4:		%{name}-libx32.patch
+Patch3:		%{name}-libx32.patch
+# Fedora patches
+# https://bugzilla.gnome.org/show_bug.cgi?id=789714
+Patch11:	%{name}-python3-unicode-errors.patch
+# https://gitlab.gnome.org/GNOME/libxml2/commit/0815302dee2b78139832c2080348086a0564836b.patch
+Patch12:	%{name}-fix-relaxed-approach-to-nested-documents.patch
+# https://gitlab.gnome.org/GNOME/libxml2/merge_requests/68
+Patch13:	libxml2-CVE-2019-20388.patch
+# https://gitlab.gnome.org/GNOME/libxml2/merge_requests/63
+Patch14:	libxml2-CVE-2020-7595.patch
+# https://gitlab.gnome.org/GNOME/libxml2/merge_requests/71
+Patch15:	libxml2-parenthesize-type-checks.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1.4
@@ -114,7 +124,7 @@ Summary:	libxml2 API documentation
 Summary(pl.UTF-8):	Dokumentacja API libxml2
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -174,8 +184,12 @@ do biblioteki libxml2.
 %patch1 -p1
 %endif
 %patch2 -p1
-
-%patch4 -p1
+%patch3 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
 
 %build
 %{__libtoolize}
@@ -299,7 +313,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/drv_libxml2.py[co]
 %{py_sitedir}/libxml2.py[co]
 %if "%{py_ver}" > "2.4"
-%{py_sitedir}/libxml2_python-*.egg-info
+%{py_sitedir}/libxml2_python-%{version}-py*.egg-info
 %endif
 %endif
 
