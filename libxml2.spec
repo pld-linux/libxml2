@@ -199,7 +199,7 @@ do biblioteki libxml2.
 %{__automake}
 %configure \
 	--disable-silent-rules \
-	%{!?with_static_libs:--disable-static=no} \
+	%{!?with_static_libs:--disable-static} \
 	--without-python \
 	%{!?with_zlib:--without-zlib} \
 	--with-lzma \
