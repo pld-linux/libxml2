@@ -124,9 +124,7 @@ Summary:	libxml2 API documentation
 Summary(pl.UTF-8):	Dokumentacja API libxml2
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 libxml2 API documentation.
