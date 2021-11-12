@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.9.12
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -26,6 +26,7 @@ Patch0:		%{name}-man_fixes.patch
 Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
 Patch3:		%{name}-libx32.patch
+Patch4:		lxml-api-abuse.patch
 # Fedora patches
 # https://bugzilla.gnome.org/show_bug.cgi?id=789714
 Patch11:	%{name}-python3-unicode-errors.patch
@@ -175,6 +176,7 @@ do biblioteki libxml2.
 %endif
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 %patch11 -p1
 
 %build
