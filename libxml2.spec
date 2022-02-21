@@ -15,18 +15,18 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.9.12
-Release:	2
+Version:	2.9.13
+Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
-Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-# Source0-md5:	f433a39be087a9f0b197eb2307ad9f75
+#Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
+Source0:	https://download.gnome.org/sources/libxml2/2.9/%{name}-%{version}.tar.xz
+# Source0-md5:	824470f8cc325ae6b01f174b842c321f
 Patch0:		%{name}-man_fixes.patch
 Patch1:		%{name}-open.gz.patch
 Patch2:		%{name}-largefile.patch
 Patch3:		%{name}-libx32.patch
-Patch4:		lxml-api-abuse.patch
 # Fedora patches
 # https://bugzilla.gnome.org/show_bug.cgi?id=789714
 Patch11:	%{name}-python3-unicode-errors.patch
@@ -44,7 +44,10 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	rpm-pythonprov
 %endif
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.714
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 BuildRequires:	xz-devel
 %{?with_zlib:BuildRequires:	zlib-devel >= 1.2.3.3}
 # history support in xmllint is disabled by default
@@ -176,7 +179,6 @@ do biblioteki libxml2.
 %endif
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 %patch11 -p1
 
 %build
@@ -190,6 +192,7 @@ do biblioteki libxml2.
 	%{!?with_static_libs:--disable-static} \
 	--without-python \
 	%{!?with_zlib:--without-zlib} \
+	--with-html-dir=%{_docdir}/libxml2 \
 	--with-lzma \
 	--with%{!?with_mem_debug:out}-mem-debug
 
@@ -217,9 +220,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	devhelpdir=%{_gtkdocdir}/libxml2 \
-	m4datadir=%{_aclocaldir} \
-	pkgconfigdir=%{_pkgconfigdir}
+	EXAMPLES_DIR=%{_examplesdir}/%{name}-%{version} \
+	devhelpdir=%{_gtkdocdir}/libxml2
 
 %if %{with python2}
 cd python
@@ -235,11 +237,9 @@ cd python
 cd ..
 %endif
 
-# move html doc to -devel package
-install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
-%{__mv} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html \
-	$RPM_BUILD_ROOT%{_docdir}/%{name}-devel-%{version}
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+# paths n/a in our packaging scheme
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/Copyright
+%{__rm} $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/README
 
 # install catalog file
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
@@ -254,7 +254,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog Copyright NEWS README TODO
+%doc Copyright NEWS README.md TODO TODO_SCHEMAS
 %attr(755,root,root) %{_libdir}/libxml2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libxml2.so.2
 %{_mandir}/man3/libxml.3*
@@ -264,7 +264,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc %{_docdir}/%{name}-devel-%{version}
 %attr(755,root,root) %{_bindir}/xml2-config
 %attr(755,root,root) %{_libdir}/libxml2.so
 %{_libdir}/libxml2.la
@@ -284,7 +283,9 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
+%{_docdir}/%{name}
 %{_gtkdocdir}/libxml2
+%{_examplesdir}/%{name}-%{version}
 %endif
 
 %files progs
