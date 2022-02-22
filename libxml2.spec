@@ -37,11 +37,13 @@ BuildRequires:	libtool >= 2:2.0
 %if %{with python2}
 BuildRequires:	python-devel >= 2.0
 BuildRequires:	python-modules >= 2.0
+BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 %endif
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-setuptools
 BuildRequires:	rpm-pythonprov
 %endif
 BuildRequires:	rpm-build >= 4.6
