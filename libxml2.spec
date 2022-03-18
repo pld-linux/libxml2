@@ -148,7 +148,7 @@ Summary(pl.UTF-8):	Moduł libxml2 dla Pythona 2.x
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-libs
-Obsoletes:	libxml2-python
+Obsoletes:	libxml2-python < 1:2.6
 
 %description -n python-%{name}
 This is the libxml2 module for Python 2.x, providing access to the
