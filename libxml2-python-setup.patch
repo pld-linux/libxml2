@@ -1,0 +1,21 @@
+--- libxml2-2.10.0/python/setup.py.in.orig	2022-05-02 14:10:21.000000000 +0200
++++ libxml2-2.10.0/python/setup.py.in	2022-08-18 21:39:44.799159134 +0200
+@@ -85,7 +85,8 @@ if xml_includes == "":
+ 
+ # those are added in the linker search path for libraries
+ libdirs = [
+-os.path.join(ROOT,'lib'),
++'@abs_top_builddir@/.libs',
++'@libdir@',
+ ]
+ 
+ xml_files = ["libxml2-api.xml", "libxml2-python-api.xml",
+@@ -194,7 +195,7 @@ modules = [ 'libxml2', 'drv_libxml2' ]
+ if WITHDLLS:
+     modules.append('libxmlmods.__init__')
+ c_files = ['libxml2-py.c', 'libxml.c', 'types.c' ]
+-includes= [xml_includes]
++includes= ['@abs_top_builddir@/include']
+ libs    = [libraryPrefix + "xml2"] + platformLibs
+ macros  = []
+ if with_threads:

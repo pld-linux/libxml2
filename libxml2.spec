@@ -18,7 +18,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.10.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -28,6 +28,7 @@ Source0:	https://download.gnome.org/sources/libxml2/2.10/%{name}-%{version}.tar.
 Patch0:		%{name}-open.gz.patch
 Patch1:		%{name}-largefile.patch
 Patch2:		%{name}-libx32.patch
+Patch3:		%{name}-python-setup.patch
 # Fedora patches
 # https://bugzilla.gnome.org/show_bug.cgi?id=789714
 Patch11:	%{name}-python3-unicode-errors.patch
@@ -182,6 +183,7 @@ do biblioteki libxml2.
 %endif
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 %patch11 -p1
 
 %build
@@ -208,7 +210,6 @@ cd python
 %py_build
 cd ..
 %endif
-
 
 %if %{with python3}
 cd python
