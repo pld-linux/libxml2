@@ -2,7 +2,9 @@
 # - fix build without libxml2-devel (python library uses old headers)
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
+%bcond_without	apidocs		# API documentation
+%bcond_with	ftp		# FTP support
+%bcond_without	legacy		# legacy API support
 %bcond_without	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
 %bcond_without	static_libs	# static library
@@ -15,28 +17,28 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.9.14
+Version:	2.10.0
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-Source0:	https://download.gnome.org/sources/libxml2/2.9/%{name}-%{version}.tar.xz
-# Source0-md5:	b7b3029ac6beb32a7925225515f83ca3
-Patch0:		%{name}-man_fixes.patch
-Patch1:		%{name}-open.gz.patch
-Patch2:		%{name}-largefile.patch
-Patch3:		%{name}-libx32.patch
+Source0:	https://download.gnome.org/sources/libxml2/2.10/%{name}-%{version}.tar.xz
+# Source0-md5:	54fdcf2404eb5c1ca59ffc82b2edff78
+Patch0:		%{name}-open.gz.patch
+Patch1:		%{name}-largefile.patch
+Patch2:		%{name}-libx32.patch
 # Fedora patches
 # https://bugzilla.gnome.org/show_bug.cgi?id=789714
 Patch11:	%{name}-python3-unicode-errors.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
-BuildRequires:	automake >= 1.4
+BuildRequires:	automake >= 1:1.15
 BuildRequires:	libtool >= 2:2.0
+BuildRequires:	pkgconfig
 %if %{with python2}
-BuildRequires:	python-devel >= 2.0
-BuildRequires:	python-modules >= 2.0
+BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	python-modules >= 1:2.5
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 %endif
@@ -175,12 +177,11 @@ do biblioteki libxml2.
 
 %prep
 %setup -q
-%patch0 -p1
 %if %{with zlib}
-%patch1 -p1
+%patch0 -p1
 %endif
+%patch1 -p1
 %patch2 -p1
-%patch3 -p1
 %patch11 -p1
 
 %build
@@ -191,12 +192,14 @@ do biblioteki libxml2.
 %{__automake}
 %configure \
 	--disable-silent-rules \
-	%{!?with_static_libs:--disable-static} \
-	--without-python \
-	%{!?with_zlib:--without-zlib} \
+	%{?with_static_libs:--enable-static} \
+	%{?with_ftp:--with-ftp} \
 	--with-html-dir=%{_docdir}/libxml2 \
+	%{?with_legacy:--with-legacy} \
 	--with-lzma \
-	--with%{!?with_mem_debug:out}-mem-debug
+	--with-mem-debug%{!?with_mem_debug:=no} \
+	--without-python \
+	%{!?with_zlib:--without-zlib}
 
 %{__make}
 
@@ -222,7 +225,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	EXAMPLES_DIR=%{_examplesdir}/%{name}-%{version} \
 	devhelpdir=%{_gtkdocdir}/libxml2
 
 %if %{with python2}
@@ -239,9 +241,8 @@ cd python
 cd ..
 %endif
 
-# paths n/a in our packaging scheme
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/Copyright
-%{__rm} $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/README
+install -d $RPM_BUILD_ROOT%{_examplesdir}
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/libxml2/examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 # install catalog file
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
@@ -259,8 +260,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc Copyright NEWS README.md TODO TODO_SCHEMAS
 %attr(755,root,root) %{_libdir}/libxml2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libxml2.so.2
-%{_mandir}/man3/libxml.3*
-
 %dir %{_sysconfdir}/xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/xml/catalog
 
@@ -269,7 +268,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xml2-config
 %attr(755,root,root) %{_libdir}/libxml2.so
 %{_libdir}/libxml2.la
-%attr(755,root,root) %{_libdir}/xml2Conf.sh
 %{_libdir}/cmake/libxml2
 %{_pkgconfigdir}/libxml-2.0.pc
 %{_aclocaldir}/libxml.m4
@@ -303,9 +301,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/libxml2mod.so
 %{py_sitedir}/drv_libxml2.py[co]
 %{py_sitedir}/libxml2.py[co]
-%if "%{py_ver}" > "2.4"
 %{py_sitedir}/libxml2_python-%{version}-py*.egg-info
-%endif
 %endif
 
 %if %{with python3}
