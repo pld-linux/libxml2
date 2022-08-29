@@ -17,14 +17,14 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.10.1
+Version:	2.10.2
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
 Source0:	https://download.gnome.org/sources/libxml2/2.10/%{name}-%{version}.tar.xz
-# Source0-md5:	c320ba2d7bfa02547f3fc0df54300326
+# Source0-md5:	5ffd0cd047056d5699b3363c635582bc
 Patch0:		%{name}-open.gz.patch
 Patch1:		%{name}-largefile.patch
 Patch2:		%{name}-libx32.patch
@@ -34,7 +34,7 @@ Patch3:		%{name}-python-setup.patch
 Patch11:	%{name}-python3-unicode-errors.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
-BuildRequires:	automake >= 1:1.15
+BuildRequires:	automake >= 1:1.16.3
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	pkgconfig
 %if %{with python2}
