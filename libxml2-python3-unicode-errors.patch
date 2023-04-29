@@ -26,7 +26,7 @@ Index: libxml2-2.9.5/python/libxml.c
 -        message = libxml_charPtrConstWrap(str);
 +        message = libxml_charPtrConstWrap(ptr);
          PyTuple_SetItem(list, 1, message);
-         result = PyEval_CallObject(libxml_xmlPythonErrorFuncHandler, list);
+         result = PyObject_CallObject(libxml_xmlPythonErrorFuncHandler, list);
 +        /* Forget any errors caused in the error handler. */
 +        PyErr_Clear();
          Py_XDECREF(list);
