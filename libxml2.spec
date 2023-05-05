@@ -196,7 +196,6 @@ do biblioteki libxml2.
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static} \
 	%{?with_ftp:--with-ftp} \
-	--with-html-dir=%{_docdir}/libxml2 \
 	%{?with_legacy:--with-legacy} \
 	--with-lzma \
 	--with-mem-debug%{!?with_mem_debug:=no} \
