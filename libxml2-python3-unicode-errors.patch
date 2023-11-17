@@ -8,8 +8,8 @@ Index: libxml2-2.9.5/python/libxml.c
      char str[1000];
 +    unsigned char *ptr = (unsigned char *)str;
  
- #ifdef DEBUG_ERROR
-     printf("libxml_xmlErrorFuncHandler(%p, %s, ...) called\n", ctx, msg);
+     if (libxml_xmlPythonErrorFuncHandler == NULL) {
+         va_start(ap, msg);
 @@ -1636,12 +1637,20 @@ libxml_xmlErrorFuncHandler(ATTRIBUTE_UNU
  	    str[999] = 0;
          va_end(ap);
