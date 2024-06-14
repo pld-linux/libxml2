@@ -9,7 +9,6 @@
 %bcond_without	python3		# CPython 3.x module
 %bcond_without	static_libs	# static library
 %bcond_without	zlib		# zlib support
-%bcond_with	mem_debug	# libxml2 memory debuging
 %bcond_without	tests		# "make check" call
 
 Summary:	libXML library version 2
@@ -17,14 +16,14 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.12.8
+Version:	2.13.0
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-Source0:	https://download.gnome.org/sources/libxml2/2.12/%{name}-%{version}.tar.xz
-# Source0-md5:	121a262ac4e4b4110a1104ac33676903
+Source0:	https://download.gnome.org/sources/libxml2/2.13/%{name}-%{version}.tar.xz
+# Source0-md5:	22a4b108240c3f2aeb1354346055b436
 Patch0:		%{name}-open.gz.patch
 Patch1:		%{name}-largefile.patch
 Patch2:		%{name}-libx32.patch
@@ -196,11 +195,12 @@ do biblioteki libxml2.
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static} \
 	%{?with_ftp:--with-ftp} \
+	--with-http \
 	%{?with_legacy:--with-legacy} \
 	--with-lzma \
-	--with-mem-debug%{!?with_mem_debug:=no} \
 	--without-python \
-	%{!?with_zlib:--without-zlib}
+	--with-tls \
+	%{?with_zlib:--with-zlib}
 
 %{__make}
 
@@ -241,8 +241,10 @@ cd python
 cd ..
 %endif
 
-install -d $RPM_BUILD_ROOT%{_examplesdir}
-%{__mv} $RPM_BUILD_ROOT%{_docdir}/libxml2/examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+%if %{with apidocs}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -p example/*.{c,xml} $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+%endif
 
 # install catalog file
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/xml
