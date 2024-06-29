@@ -79,7 +79,7 @@ Summary(es.UTF-8):	Biblioteca y archivos de inclusión para desarrollo de aplica
 Summary(pl.UTF-8):	Pliki nagłówkowe i inne do libxml2
 Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires:	xz-devel
 Requires:	zlib-devel
 
@@ -104,7 +104,7 @@ Summary(es.UTF-8):	Static libraries to develop libxml applications
 Summary(pl.UTF-8):	Biblioteka statyczna libxml2
 Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{epoch}:%{version}-%{release}
 
 %description static
 Static libxml2 libraries.
@@ -136,7 +136,7 @@ Dokumentacja API libxml2.
 Summary:	XML files parser
 Summary(pl.UTF-8):	Analizator składniowy plików XML
 Group:		Applications/Text
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
 
 %description progs
 XML files parser.
@@ -148,7 +148,7 @@ Analizator składniowy plików XML.
 Summary:	libxml2 module for Python 2.x
 Summary(pl.UTF-8):	Moduł libxml2 dla Pythona 2.x
 Group:		Libraries/Python
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires:	python-libs
 Obsoletes:	libxml2-python < 1:2.6
 
@@ -164,7 +164,7 @@ do biblioteki libxml2.
 Summary:	libxml2 module for Python 3.x
 Summary(pl.UTF-8):	Moduł libxml2 dla Pythona 3.x
 Group:		Libraries/Python
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires:	python3-libs
 
 %description -n python3-%{name}
