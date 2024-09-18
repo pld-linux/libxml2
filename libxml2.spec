@@ -16,14 +16,14 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.13.3
+Version:	2.13.4
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
 Source0:	https://download.gnome.org/sources/libxml2/2.13/%{name}-%{version}.tar.xz
-# Source0-md5:	aeb92dc58cea91c95a10751327193a11
+# Source0-md5:	1c5f9cfeee665eb6f1ddc186aba4cf2f
 Patch0:		%{name}-open.gz.patch
 Patch1:		%{name}-largefile.patch
 Patch2:		%{name}-libx32.patch
