@@ -16,14 +16,14 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.13.8
+Version:	2.14.4
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-Source0:	https://download.gnome.org/sources/libxml2/2.13/%{name}-%{version}.tar.xz
-# Source0-md5:	740751403c075e55812ecaaafe9d495f
+Source0:	https://download.gnome.org/sources/libxml2/2.14/%{name}-%{version}.tar.xz
+# Source0-md5:	b35aecdbed333b6dbedb6d96d05fabc3
 Patch0:		%{name}-open.gz.patch
 Patch1:		%{name}-largefile.patch
 Patch2:		%{name}-libx32.patch
@@ -263,7 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc Copyright NEWS README.md
 %attr(755,root,root) %{_libdir}/libxml2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libxml2.so.2
+%attr(755,root,root) %ghost %{_libdir}/libxml2.so.16
 %dir %{_sysconfdir}/xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/xml/catalog
 
@@ -274,7 +274,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libxml2.la
 %{_libdir}/cmake/libxml2
 %{_pkgconfigdir}/libxml-2.0.pc
-%{_aclocaldir}/libxml.m4
 %{_includedir}/libxml2
 %{_mandir}/man1/xml2-config.1*
 

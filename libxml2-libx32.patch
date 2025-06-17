@@ -1,11 +1,11 @@
---- libxml2-2.10.0/xml2-config.in.orig	2022-08-18 16:32:47.652266712 +0200
-+++ libxml2-2.10.0/xml2-config.in	2022-08-18 16:33:48.715269239 +0200
+--- libxml2-2.14.4/xml2-config.in~	2025-06-16 19:03:54.000000000 +0200
++++ libxml2-2.14.4/xml2-config.in	2025-06-17 08:32:58.645043994 +0200
 @@ -89,7 +89,7 @@ while test $# -gt 0; do
-             libs="@XML_LIBS@ @XML_PRIVATE_LIBS@ @MODULE_PLATFORM_LIBS@ @LIBS@"
+             libs="@XML_LIBS@ @XML_PRIVATE_LIBS@ @LIBS@"
          fi
  
--        if [ "@XML_LIBDIR@" != "-L/usr/lib" -a "@XML_LIBDIR@" != "-L/usr/lib64" ]; then
-+        if [ "@XML_LIBDIR@" != "-L/usr/lib" -a "@XML_LIBDIR@" != "-L/usr/lib64" -a "@XML_LIBDIR@" != "-L/usr/libx32" ]; then
+-        if [ "@libdir@" != "/usr/lib" -a "@libdir@" != "/usr/lib64" ]; then
++        if [ "@libdir@" != "/usr/lib" -a "@libdir@" != "/usr/lib64" -a "@XML_LIBDIR@" != "-L/usr/libx32" ]; then
              libs="@XML_LIBDIR@ $libs"
          fi
          ;;
