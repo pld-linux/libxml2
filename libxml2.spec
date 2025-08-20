@@ -17,7 +17,7 @@ Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
 Version:	2.14.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	MIT
 Group:		Libraries
@@ -29,6 +29,7 @@ Patch1:		%{name}-largefile.patch
 Patch2:		%{name}-libx32.patch
 Patch3:		%{name}-python-setup.patch
 Patch4:		%{name}-normalize.patch
+Patch5:		initGenericErrorDefaultFunc.patch
 # Fedora patches
 # https://bugzilla.gnome.org/show_bug.cgi?id=789714
 Patch11:	%{name}-python3-unicode-errors.patch
@@ -185,6 +186,8 @@ do biblioteki libxml2.
 %patch -P2 -p1
 %patch -P3 -p1
 %patch -P4 -p1
+%patch -P5 -p1
+
 %patch -P11 -p1
 
 %build
