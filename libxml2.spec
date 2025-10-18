@@ -5,7 +5,7 @@
 %bcond_without	apidocs		# API documentation
 %bcond_with	ftp		# FTP support
 %bcond_without	legacy		# legacy API support
-%bcond_without	python2		# CPython 2.x module
+%bcond_with	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
 %bcond_without	static_libs	# static library
 %bcond_without	zlib		# zlib support
@@ -16,14 +16,14 @@ Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
 Summary(pt_BR.UTF-8):	Biblioteca libXML versão 2
 Name:		libxml2
-Version:	2.14.6
+Version:	2.15.1
 Release:	1
 Epoch:		1
 License:	MIT
 Group:		Libraries
 #Source0:	ftp://xmlsoft.org/libxml2/%{name}-%{version}.tar.gz
-Source0:	https://download.gnome.org/sources/libxml2/2.14/%{name}-%{version}.tar.xz
-# Source0-md5:	a2bb2b6cb8fc7be1fafa14f500e4f7c5
+Source0:	https://download.gnome.org/sources/libxml2/2.15/%{name}-%{version}.tar.xz
+# Source0-md5:	fcf38f534bb8996984dba978ee3e27f4
 Patch0:		%{name}-open.gz.patch
 Patch1:		%{name}-largefile.patch
 Patch2:		%{name}-libx32.patch
@@ -35,6 +35,10 @@ Patch11:	%{name}-python3-unicode-errors.patch
 URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1:1.16.3
+%if %{with apidocs}
+BuildRequires:	doxygen >= 1.9.2
+BuildRequires:	libxslt-progs
+%endif
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	pkgconfig
 %if %{with python2}
@@ -197,6 +201,7 @@ do biblioteki libxml2.
 %configure \
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static} \
+	%{?with_apidocs:--with-docs} \
 	%{?with_ftp:--with-ftp} \
 	--with-http \
 	%{?with_legacy:--with-legacy} \
@@ -227,8 +232,7 @@ cd ..
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	devhelpdir=%{_gtkdocdir}/libxml2
+	DESTDIR=$RPM_BUILD_ROOT
 
 %if %{with python2}
 cd python
@@ -288,7 +292,6 @@ rm -rf $RPM_BUILD_ROOT
 %files apidocs
 %defattr(644,root,root,755)
 %{_docdir}/%{name}
-%{_gtkdocdir}/libxml2
 %{_examplesdir}/%{name}-%{version}
 %endif
 

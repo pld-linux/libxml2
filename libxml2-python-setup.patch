@@ -21,7 +21,7 @@
 +'@libdir@',
  ]
  
- xml_files = ["libxml2-api.xml", "libxml2-python-api.xml",
+ xml_files = ["libxml.c", "libxml.py", "libxml_wrap.h", "types.c",
 @@ -194,7 +185,7 @@
  if WITHDLLS:
      modules.append('libxmlmods.__init__')

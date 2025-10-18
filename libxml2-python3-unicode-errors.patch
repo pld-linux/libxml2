@@ -1,17 +1,15 @@
-Index: libxml2-2.9.5/python/libxml.c
-===================================================================
---- libxml2-2.9.5.orig/python/libxml.c
-+++ libxml2-2.9.5/python/libxml.c
-@@ -1620,6 +1620,7 @@ libxml_xmlErrorFuncHandler(ATTRIBUTE_UNU
+--- libxml2-2.15.1/python/libxml.c~	2025-10-16 17:49:18.000000000 +0200
++++ libxml2-2.15.1/python/libxml.c	2025-10-18 12:06:23.895443826 +0200
+@@ -1488,6 +1488,7 @@ libxml_xmlErrorFuncHandler(ATTRIBUTE_UNU
      PyObject *message;
      PyObject *result;
-     char str[1000];
+     char str[1024];
 +    unsigned char *ptr = (unsigned char *)str;
  
      if (libxml_xmlPythonErrorFuncHandler == NULL) {
          va_start(ap, msg);
-@@ -1636,12 +1637,20 @@ libxml_xmlErrorFuncHandler(ATTRIBUTE_UNU
- 	    str[999] = 0;
+@@ -1498,12 +1499,20 @@ libxml_xmlErrorFuncHandler(ATTRIBUTE_UNU
+         vsnprintf(str, sizeof(str), msg, ap);
          va_end(ap);
  
 +#if PY_MAJOR_VERSION >= 3
