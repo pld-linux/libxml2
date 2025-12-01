@@ -57,7 +57,6 @@ BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-BuildRequires:	xz-devel
 %{?with_zlib:BuildRequires:	zlib-devel >= 1.2.3.3}
 # history support in xmllint is disabled by default
 #BuildRequires:	ncurses-devel
@@ -205,7 +204,6 @@ do biblioteki libxml2.
 	%{?with_ftp:--with-ftp} \
 	--with-http \
 	%{?with_legacy:--with-legacy} \
-	--with-lzma \
 	--without-python \
 	--with-tls \
 	%{?with_zlib:--with-zlib}
