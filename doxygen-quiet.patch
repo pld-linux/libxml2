@@ -1,0 +1,18 @@
+--- libxml2-2.15.1/doc/Doxyfile.orig	2025-10-16 17:49:18.000000000 +0200
++++ libxml2-2.15.1/doc/Doxyfile	2025-12-01 20:23:25.133991662 +0100
+@@ -108,3 +108,4 @@
+                          $(BUILD_ROOT)include
+ PREDEFINED             = XML_TREE_INTERNALS
+ HAVE_DOT               = NO
++QUIET                  = YES
+--- libxml2-2.15.1/doc/Makefile.am.orig	2025-10-16 17:49:18.000000000 +0200
++++ libxml2-2.15.1/doc/Makefile.am	2025-12-01 20:24:15.482525035 +0100
+@@ -13,7 +13,7 @@
+ 
+ html.stamp: Doxyfile
+ 	SOURCE_ROOT=$(top_srcdir)/ BUILD_ROOT=$(top_builddir)/ \
+-	    $(DOXYGEN) -q $<
++	    $(DOXYGEN) $<
+ 	@touch $@
+ 
+ CLEANFILES = html.stamp

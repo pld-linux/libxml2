@@ -28,6 +28,7 @@ Patch1:		%{name}-largefile.patch
 Patch2:		%{name}-libx32.patch
 Patch3:		%{name}-python-setup.patch
 Patch4:		%{name}-normalize.patch
+Patch5:		doxygen-quiet.patch
 # Fedora patches
 # https://bugzilla.gnome.org/show_bug.cgi?id=789714
 Patch11:	%{name}-python3-unicode-errors.patch
@@ -35,7 +36,7 @@ URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1:1.16.3
 %if %{with apidocs}
-BuildRequires:	doxygen >= 1.9.2
+BuildRequires:	doxygen
 BuildRequires:	libxslt-progs
 %endif
 BuildRequires:	libtool >= 2:2.0
@@ -166,6 +167,7 @@ do biblioteki libxml2.
 %patch -P2 -p1
 %patch -P3 -p1
 %patch -P4 -p1
+%patch -P5 -p1
 
 %patch -P11 -p1
 
