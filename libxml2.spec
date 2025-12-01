@@ -40,6 +40,7 @@ URL:		http://xmlsoft.org/
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1:1.16.3
 %if %{with apidocs}
+BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	doxygen
 BuildRequires:	libxslt-progs
 %endif
