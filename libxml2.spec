@@ -5,7 +5,6 @@
 %bcond_without	apidocs		# API documentation
 %bcond_with	ftp		# FTP support
 %bcond_without	legacy		# legacy API support
-%bcond_with	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
 %bcond_without	static_libs	# static library
 %bcond_without	zlib		# zlib support
@@ -41,12 +40,6 @@ BuildRequires:	libxslt-progs
 %endif
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	pkgconfig
-%if %{with python2}
-BuildRequires:	python-devel >= 1:2.5
-BuildRequires:	python-modules >= 1:2.5
-BuildRequires:	python-setuptools
-BuildRequires:	rpm-pythonprov
-%endif
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
@@ -148,28 +141,13 @@ XML files parser.
 %description progs -l pl.UTF-8
 Analizator składniowy plików XML.
 
-%package -n python-%{name}
-Summary:	libxml2 module for Python 2.x
-Summary(pl.UTF-8):	Moduł libxml2 dla Pythona 2.x
-Group:		Libraries/Python
-Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
-Requires:	python-libs
-Obsoletes:	libxml2-python < 1:2.6
-
-%description -n python-%{name}
-This is the libxml2 module for Python 2.x, providing access to the
-libxml2 library.
-
-%description -n python-%{name} -l pl.UTF-8
-Ten pakiet zawiera moduł libxml2 dla Pythona 2.x, zapewniający dostęp
-do biblioteki libxml2.
-
 %package -n python3-%{name}
 Summary:	libxml2 module for Python 3.x
 Summary(pl.UTF-8):	Moduł libxml2 dla Pythona 3.x
 Group:		Libraries/Python
 Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires:	python3-libs
+Obsoletes:	python-libxml2 < 1:2.15.0
 
 %description -n python3-%{name}
 This is the libxml2 module for Python 3.x, providing access to the
@@ -210,12 +188,6 @@ do biblioteki libxml2.
 
 %{__make}
 
-%if %{with python2}
-cd python
-%py_build
-cd ..
-%endif
-
 %if %{with python3}
 cd python
 %py3_build
@@ -231,14 +203,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-%if %{with python2}
-cd python
-%py_install
-
-%py_postclean
-cd ..
-%endif
 
 %if %{with python3}
 cd python
@@ -299,15 +263,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xmllint
 %{_mandir}/man1/xmlcatalog.1*
 %{_mandir}/man1/xmllint.1*
-
-%if %{with python2}
-%files -n python-%{name}
-%defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/libxml2mod.so
-%{py_sitedir}/drv_libxml2.py[co]
-%{py_sitedir}/libxml2.py[co]
-%{py_sitedir}/libxml2_python-%{version}-py*.egg-info
-%endif
 
 %if %{with python3}
 %files -n python3-%{name}
