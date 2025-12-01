@@ -9,6 +9,7 @@
 %bcond_without	static_libs	# static library
 %bcond_without	zlib		# zlib support
 %bcond_without	tests		# "make check" call
+%bcond_without	obsolete_py2	# obsolete legacy CPython 2.x module (buildable from python-libxml2.spec)
 
 %if %{without apidocs}
 %undefine	python3
@@ -153,7 +154,7 @@ Summary(pl.UTF-8):	Moduł libxml2 dla Pythona 3.x
 Group:		Libraries/Python
 Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires:	python3-libs
-Obsoletes:	python-libxml2 < 1:2.15.0
+%{?with_obsolete_py2:Obsoletes:	python-libxml2 < 1:2.15.0}
 
 %description -n python3-%{name}
 This is the libxml2 module for Python 3.x, providing access to the
