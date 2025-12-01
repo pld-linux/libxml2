@@ -10,6 +10,10 @@
 %bcond_without	zlib		# zlib support
 %bcond_without	tests		# "make check" call
 
+%if %{without apidocs}
+%undefine	python3
+%endif
+
 Summary:	libXML library version 2
 Summary(es.UTF-8):	Biblioteca libXML version 2
 Summary(pl.UTF-8):	Biblioteka libXML wersja 2
