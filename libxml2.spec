@@ -3,7 +3,6 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# API documentation
-%bcond_with	ftp		# FTP support
 %bcond_without	legacy		# legacy API support
 %bcond_without	python3		# CPython 3.x module
 %bcond_without	static_libs	# static library
@@ -61,7 +60,7 @@ BuildRequires:	xz
 # history support in xmllint is disabled by default
 #BuildRequires:	ncurses-devel
 #BuildRequires:	readline-devel >= 4.2
-Requires:	zlib >= 1.2.3.3
+%{?with_zlib:Requires:	zlib >= 1.2.3.3}
 Obsoletes:	xml-common
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -84,8 +83,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe i inne do libxml2
 Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento de aplicações que usem a biblioteca libxml
 Group:		Development/Libraries
 Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
-Requires:	xz-devel
-Requires:	zlib-devel
+%{?with_zlib:Requires:	zlib-devel}
 
 %description devel
 Header files etc you can use to develop libxml2 applications.
@@ -187,7 +185,6 @@ do biblioteki libxml2.
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static} \
 	%{?with_apidocs:--with-docs} \
-	%{?with_ftp:--with-ftp} \
 	--with-http \
 	%{?with_legacy:--with-legacy} \
 	--without-python \
